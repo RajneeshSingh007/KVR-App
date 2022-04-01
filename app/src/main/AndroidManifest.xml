@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.kvr.user">
+
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+  <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+  <queries>
+    <!-- View Intent for UPI apps -->
+    <intent>
+      <action android:name="android.intent.action.VIEW" />
+      <data android:scheme="upi" />
+    </intent>
+
+    <!-- Chooser Intent for UPI apps -->
+    <intent>
+      <action android:name="android.intent.action.CHOOSER" />
+      <data android:scheme="upi" />
+    </intent>
+
+    <!-- Package Specific UPI Apps -->
+    <package android:name="in.amazon.mShop.android.shopping" />
+    <package android:name="in.org.npci.upiapp" />
+    <package android:name="com.google.android.apps.nbu.paisa.user" />
+    <package android:name="com.phonepe.app" />
+    <package android:name="net.one97.paytm" />
+  </queries>
+  <application
+      android:requestLegacyExternalStorage="true"
+      android:name=".BaseApplication"
+      android:allowBackup="true"
+      android:icon="@mipmap/ic_launcher"
+      android:label="@string/app_name"
+      android:roundIcon="@mipmap/ic_launcher"
+      android:supportsRtl="true"
+      android:usesCleartextTraffic="true"
+      android:theme="@style/Theme.KVR">
+
+    <meta-data android:name="android.max_aspect" android:value="2.16" />
+    <activity
+        android:configChanges="locale"
+        android:name="com.kvr.user.MainActivity"
+        android:exported="true"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.KVR.NoActionBar">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <provider android:name="androidx.core.content.FileProvider" android:authorities="com.kvr.user.fileprovider" android:exported="false" android:grantUriPermissions="true">
+      <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths"/>
+    </provider>
+    <service
+        android:name=".MyFirebaseInstanceIdService"
+        android:permission="com.google.android.c2dm.permission.SEND"
+        android:exported="false">
+      <intent-filter>
+        <action android:name="com.google.firebase.MESSAGING_EVENT" />
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+      </intent-filter>
+    </service>
+
+    <receiver
+        android:name="com.razorpay.RzpTokenReceiver"
+        android:exported="false">
+      <intent-filter>
+        <action android:name="rzp.device_token.share" />
+      </intent-filter>
+    </receiver>
+    <meta-data
+        android:name="com.razorpay.ApiKey"
+        android:value="@string/razorpay_keyid"
+        />
+
+    <activity
+        android:name="com.razorpay.CheckoutActivity"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+        android:exported="true"
+        android:theme="@style/CheckoutTheme">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <data
+            android:host="rzp.io"
+            android:scheme="io.rzp" />
+      </intent-filter>
+    </activity>
+  </application>
+
+</manifest>

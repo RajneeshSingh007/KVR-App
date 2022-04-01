@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="support">మద్దతు: +911234567890</string>
+    <string name="my_profile">నా ప్రొఫైల్</string>
+    <string name="my_orders">నా ఆర్డర్‌లు</string>
+    <string name="my_addresses">నా చిరునామాలు</string>
+    <string name="search_by_vehicles">వాహనం ద్వారా శోధించండి</string>
+    <string name="cart">కార్ట్</string>
+    <string name="change_language">భాషను మార్చండి</string>
+    <string name="change_password">పాస్‌వర్డ్‌ని మార్చండి</string>
+    <string name="log_out">లాగ్ అవుట్</string>
+    <string name="change_category">వర్గాన్ని మార్చండి</string>
+    <string name="distributor">పంపిణీదారు</string>
+    <string name="wholesaler">టోకు వ్యాపారి</string>
+    <string name="search">శోధన</string>
+    <string name="sign_username_error">దయచేసి, ఇమెయిల్/ఫోన్ నంబర్‌ని నమోదు చేయండి</string>
+</resources>

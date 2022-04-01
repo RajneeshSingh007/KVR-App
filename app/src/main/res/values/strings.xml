@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name" translatable="false">KVR</string>
+    <string name="razorpay_keyid" translatable="false">rzp_test_1M51iw7oo5a1nk</string>
+    <string name="support">Support: +911234567890</string>
+    <string name="my_profile">My Profile</string>
+    <string name="my_orders">My Orders</string>
+    <string name="my_addresses">My Addresses</string>
+    <string name="search_by_vehicles">Search by Vehicle</string>
+    <string name="cart">Cart</string>
+    <string name="change_language">Change Language</string>
+    <string name="change_password">Change Password</string>
+    <string name="log_out">Log Out</string>
+    <string name="change_category">Change Category</string>
+    <string name="distributor">Distributor</string>
+    <string name="wholesaler">Wholesaler</string>
+    <string name="search">Search</string>
+    <string name="sign_username_error">Please, Enter Email/Phone Number</string>
+</resources>

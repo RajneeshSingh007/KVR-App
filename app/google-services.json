@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "497362276123",
+    "project_id": "kvrspares-700b9",
+    "storage_bucket": "kvrspares-700b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:497362276123:android:47602346962786caf18dbe",
+        "android_client_info": {
+          "package_name": "com.kvr.user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "497362276123-696bnvob4hrh4lk6s85g6gs3koceltme.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kvr.user",
+            "certificate_hash": "453c2e7cacc37e25f99838b84959b2e828452e65"
+          }
+        },
+        {
+          "client_id": "497362276123-o45f2p3g54t6dqcle806dgi9b3n9447c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTRspp54qh2iajmT2ZA5m8SsFdC00Arc4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "497362276123-o45f2p3g54t6dqcle806dgi9b3n9447c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
