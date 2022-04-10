@@ -167,4 +167,24 @@ object ApiServices {
         return Network<Coupons>(Coupons::class.java,"/coupons/", null).networkCall(methodType=1)
     }
 
+    suspend fun forgotPasswordApi(forgotPass: ForgotPass) : Response<CommonResponse> {
+        val body = listOf("email" to forgotPass.email)
+        return Network<CommonResponse>(CommonResponse::class.java, "/forgot-password", body).networkCall(methodType=0)
+    }
+
+    suspend fun resetPasswordApi(resetForgotPass: ResetForgotPass) : Response<CommonResponse> {
+        val body = listOf("otp" to resetForgotPass.otp,"password" to resetForgotPass.password)
+        return Network<CommonResponse>(CommonResponse::class.java, "/reset-password", body).networkCall(methodType=0)
+    }
+
+    suspend fun searchProductsApi(searchProducts: SearchProducts) : Response<ProductList> {
+        val body = listOf("variation[Size]" to searchProducts.variation,
+            "part_code" to searchProducts.partCode,
+            "variation[Engine]" to searchProducts.engine,
+           // "part_no" to searchProducts.partNumber,
+            "name" to searchProducts.name)
+        //Log.e("body", "${body.toString()}")
+        return Network<ProductList>(ProductList::class.java,"/products", body).networkCall(methodType=0)
+    }
+
 }

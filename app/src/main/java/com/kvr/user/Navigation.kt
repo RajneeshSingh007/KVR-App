@@ -34,7 +34,9 @@ fun Navigation(navHostController: NavHostController, drawerClick: ()-> Unit = {}
         }
         composable(route = Screen.ForgotPass.route){
             resetScroll()
-            ForgotPass(navController= navHostController)
+            ForgotPass(navController= navHostController){
+                loader(it)
+            }
         }
         composable(route = Screen.ForgotSuccess.route){
             resetScroll()
@@ -46,7 +48,7 @@ fun Navigation(navHostController: NavHostController, drawerClick: ()-> Unit = {}
                 drawerClick()
             }
         }
-        composable(route = Screen.ProductList.route+"/{name}/{id}",
+        composable(route = Screen.ProductList.route+"/{name}/{id}/{search}",
             arguments = listOf(
                 navArgument("name") {
                     defaultValue = ""
@@ -54,12 +56,16 @@ fun Navigation(navHostController: NavHostController, drawerClick: ()-> Unit = {}
                 navArgument("id") {
                     defaultValue = -1
                 },
+                navArgument("search") {
+                    defaultValue = ""
+                },
         )
         ){
             resetScroll()
             val id = it.arguments!!.getInt("id", -1)
             val name = Helpers.removeNull(it.arguments!!.getString("name", ""))
-            ProductList(navController = navHostController, name = name, id = id){
+            val search = it.arguments!!.getString("search", "")
+            ProductList(navController = navHostController, name = name, id = id,search=search){
                 drawerClick()
             }
         }

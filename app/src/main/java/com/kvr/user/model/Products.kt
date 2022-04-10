@@ -21,14 +21,14 @@ data class ProductDetails (
 
 data class PData (
 
-    val updated_at : String,
-    val is_popular : Int,
-    val name : String,
-    val photo : String,
-    val created_at : String,
-    val id : Int,
-    val slug : String,
-    val status : Int,
+    val updated_at : String="",
+    val is_popular : Int=0,
+    val name : String="",
+    val photo : String="",
+    val created_at : String="",
+    val id : Int=0,
+    val slug : String="",
+    val status : Int=0,
     val products: List<ProductsData>
 )
 
@@ -47,7 +47,7 @@ data class ProductsData (
     val category_id : Int,
     val updated_at : String,
     val file_type : String,
-    val details : String,
+    val details : String="",
     val id : Int,
     val sku : String,
     val stock : Int,
@@ -61,7 +61,7 @@ data class ProductsData (
     val license_key : String,
     val brand_id : Int,
     val tags : String,
-    val part_no : Int = -1,
+    val part_no : Double = 0.0,
     val meta_description : String,
     val is_specification : Int,
     val is_type : String,
@@ -69,7 +69,7 @@ data class ProductsData (
     val sort_details : String,
     val name : String = "",
     val specification_description : String,
-    val previous_price : Double,
+    val previous_price : Double=0.0,
     val status : Int,
     val brand : Brandsdata,
     val tax : Tax,
@@ -82,7 +82,7 @@ data class Attributes (
 
     val updated_at : String,
     val item_id : Int,
-    val name : String,
+    val name : String="",
     val created_at : String,
     val id : Int,
     val keyword : String
@@ -92,7 +92,7 @@ data class Attributes (
 
 data class Tax (
     val updated_at : String,
-    val name : String,
+    val name : String="",
     val created_at : String,
     val id : Int,
     val value : Int,
@@ -102,7 +102,7 @@ data class Tax (
 data class Galleries (
     val updated_at : String,
     val item_id : Int,
-    val photo : String,
+    val photo : String="",
     val created_at : String,
     val id : Int
 )

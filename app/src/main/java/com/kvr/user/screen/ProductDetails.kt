@@ -359,7 +359,7 @@ fun SpecificationItems(heading1:String="", content1:String="", heading2: String=
                 withStyle(
                     style = SpanContentStyle
                 ) {
-                    append(" ${content1}")
+                    append(" ${content1.replace("/",",")}")
                 }
             },
             modifier = Modifier.weight(0.5f).padding(end = 4.dp)
@@ -374,7 +374,7 @@ fun SpecificationItems(heading1:String="", content1:String="", heading2: String=
                 withStyle(
                     style = SpanContentStyle
                 ) {
-                    append(" ${content2}")
+                    append(" ${content2.replace("/",",")}")
                 }
             },
             modifier = Modifier.weight(0.5f).padding(end = 4.dp)

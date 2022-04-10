@@ -45,6 +45,7 @@ import com.kvr.user.Screen
 import com.kvr.user.model.Brandsdata
 import com.kvr.user.model.Category
 import com.kvr.user.model.ProductsData
+import com.kvr.user.model.SearchProducts
 import com.kvr.user.network.Response
 import com.kvr.user.screen.common.Header
 import com.kvr.user.screen.common.SupportButton
@@ -59,7 +60,7 @@ import com.kvr.user.widget.border
 import kotlinx.coroutines.launch
 
 @Composable
-fun ProductList(navController: NavHostController, name:String ="", id:Int=-1, drawerClick: ()-> Unit = {}) {
+fun ProductList(navController: NavHostController, name:String ="", id:Int=-1,search:String="", drawerClick: ()-> Unit = {}) {
     val productsVM = viewModel<ProductsVM>()
     val state = productsVM.state.collectAsState().value
     val productsList = remember { mutableStateListOf<ProductsData>() }
@@ -78,6 +79,19 @@ fun ProductList(navController: NavHostController, name:String ="", id:Int=-1, dr
             productsVM.fetchProductsApiCall(id)
         }
         productsVM.fetchCategoryListApiCall()
+        if(name =="Search" && search != "-1"){
+            val split = search.split("#")
+            //Log.e("split", "${split.toString()} :: ${split[0]}")
+            var searchProducts = SearchProducts(variation = split[0])
+            if(split.size > 1){
+                when(split.size){
+                    2 -> searchProducts = SearchProducts(variation = split[0], engine = split[1])
+                    3 -> searchProducts = SearchProducts(variation = split[0], engine = split[1], partCode = split[2])
+                    4 -> searchProducts = SearchProducts(variation = split[0], engine = split[1], partCode = split[2], partNumber = split[3])
+                }
+            }
+            productsVM.fetchSearchProductsApiCall(searchProducts)
+        }
     }
 
     LaunchedEffect(key1 = state){
@@ -117,18 +131,19 @@ fun ProductList(navController: NavHostController, name:String ="", id:Int=-1, dr
             navController.popBackStack()
         }, showIcon = false, title = name)
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
-        CategoryList(catList, catDialog.value, btnClick = {
-            catDialog.value = true
-        }, onDismiss = {
-            it,item ->
-            catDialog.value = false
-            if(it){
-                if (item != null) {
-                    productsList.filter { it.category_id == item.id }
+        if(name != "Search") {
+            CategoryList(catList, catDialog.value, btnClick = {
+                catDialog.value = true
+            }, onDismiss = { it, item ->
+                catDialog.value = false
+                if (it) {
+                    if (item != null) {
+                        productsList.filter { it.category_id == item.id }
+                    }
                 }
-            }
-        })
-        Spacer(modifier = Modifier.padding(vertical = 10.dp))
+            })
+            Spacer(modifier = Modifier.padding(vertical = 10.dp))
+        }
         //header
         Row(
             Modifier

@@ -179,7 +179,7 @@ fun HomeScreen(navController: NavHostController,drawerClick: ()-> Unit = {}) {
             brandList.forEachIndexed {i,item->
                 Spacer(modifier = Modifier.padding(vertical = 10.dp))
                 Brands(Color(if(i%2 == 0) 0xFF007842 else 0xFFf78122),"${Constants.BRANDS_IMAGE_BASE_URL}${item.photo}", item.name){
-                    navController.navigate("${Screen.ProductList.route}/${item.name}/${item.id}")
+                    navController.navigate("${Screen.ProductList.route}/${item.name}/${item.id}/-1")
                 }
             }
         }

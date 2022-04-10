@@ -114,9 +114,9 @@ fun MyAddress(navController: NavHostController,loader: (show:Boolean)-> Unit = {
             }
         }else if(addressList.isNotEmpty()){
             addressList.forEachIndexed{ i, it ->
-                val nameMobile = "${Helpers.removeNull(it.first_name)}#${Helpers.removeNull(it.first_name)}#${Helpers.removeNull(it.mobile_no)}"
+                val nameMobile = "${Helpers.removeNull(it.first_name)}#${Helpers.removeNull(it.last_name)}#${Helpers.removeNull(it.mobile_no)}"
                 val address =  "${Helpers.removeNull(it.address1)}#${Helpers.removeNull(it.address2)}#${Helpers.removeNull(it.city)}#${Helpers.removeNull(it.zipcode)}"
-                AddressInfo(showEditBtn =false, name = "${Helpers.removeNull(it.first_name)} ${Helpers.removeNull(it.first_name)} - ${Helpers.removeNull(it.mobile_no)}", address ="${Helpers.removeNull(it.address1)}, ${Helpers.removeNull(it.address2)}, ${Helpers.removeNull(it.city)} - ${Helpers.removeNull(it.zipcode)}", showBtn=true, deleteBtn = {
+                AddressInfo(showEditBtn =false, name = "${Helpers.removeNull(it.first_name)} ${Helpers.removeNull(it.last_name)} - ${Helpers.removeNull(it.mobile_no)}", address ="${Helpers.removeNull(it.address1)}, ${Helpers.removeNull(it.address2)}, ${Helpers.removeNull(it.city)} - ${Helpers.removeNull(it.zipcode)}", showBtn=true, deleteBtn = {
                     removeIndex.value = i
                     commonVM.deleteAddressApi(it.id)
                 }, editBtn = {

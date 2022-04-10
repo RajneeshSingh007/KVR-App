@@ -357,34 +357,38 @@ fun CartItems(cartData: CartData, showVerified:Boolean = true, showCartBtn:Boole
                                 }
                             },
                         )
-                        Text(
-                            buildAnnotatedString {
-                                withStyle(
-                                    style = SpanHeadingStyle
-                                ) {
-                                    append("Brand:")
-                                }
-                                withStyle(
-                                    style = SpanContentStyle
-                                ) {
-                                    append(" ${cartData.brand.name}")
-                                }
-                            },
-                        )
-                        Text(
-                            buildAnnotatedString {
-                                withStyle(
-                                    style = SpanHeadingStyle
-                                ) {
-                                    append("Supplier:")
-                                }
-                                withStyle(
-                                    style = SpanContentStyle
-                                ) {
-                                    append(" ${cartData.supplier.name}")
-                                }
-                            },
-                        )
+                        if(cartData.brand != null && cartData.brand.name.isNotEmpty()){
+                            Text(
+                                buildAnnotatedString {
+                                    withStyle(
+                                        style = SpanHeadingStyle
+                                    ) {
+                                        append("Brand:")
+                                    }
+                                    withStyle(
+                                        style = SpanContentStyle
+                                    ) {
+                                        append(" ${cartData.brand.name}")
+                                    }
+                                },
+                            )
+                        }
+                        if(cartData.supplier != null && cartData.supplier.name.isNotEmpty()) {
+                            Text(
+                                buildAnnotatedString {
+                                    withStyle(
+                                        style = SpanHeadingStyle
+                                    ) {
+                                        append("Supplier:")
+                                    }
+                                    withStyle(
+                                        style = SpanContentStyle
+                                    ) {
+                                        append(" ${cartData.supplier.name}")
+                                    }
+                                },
+                            )
+                        }
                         Spacer(modifier = Modifier.padding(vertical = 6.dp))
                         Text(
                             text = "₹${cartData.total}",

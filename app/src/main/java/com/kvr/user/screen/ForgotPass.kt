@@ -2,6 +2,7 @@ package com.kvr.user.screen
 
 
 import android.app.Activity
+import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -11,9 +12,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,22 +33,49 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.guru.fontawesomecomposelib.FaIcon
 import com.guru.fontawesomecomposelib.FaIcons
 import com.kvr.user.R
 import com.kvr.user.Screen
+import com.kvr.user.network.Response
 import com.kvr.user.screen.common.Header
 import com.kvr.user.screen.common.SupportButton
 import com.kvr.user.ui.theme.*
+import com.kvr.user.utils.Helpers
+import com.kvr.user.viewmodel.CommonVM
 import com.kvr.user.widget.Border
 import com.kvr.user.widget.Borders
 import com.kvr.user.widget.border
 
 @Composable
-fun ForgotPass(navController: NavHostController) {
+fun ForgotPass(navController: NavHostController,loader: (show:Boolean)-> Unit = {}) {
     val context = navController.context as Activity
     val email = remember { mutableStateOf("") }
+    val commonVM = viewModel<CommonVM>()
+    val commonState = commonVM.state.collectAsState().value
+
+    LaunchedEffect(key1 = commonState){
+        when(commonState){
+            is Response.Loading ->{
+                loader(commonState.isLoading)
+            }
+            is Response.Error ->{
+                Helpers.showToast(context, 1, commonState.error)
+            }
+            is Response.Success ->{
+                commonState.data?.message.let {
+                    if (it != null) {
+                        Helpers.showToast(context, 0, it)
+                    }
+                }
+                navController.navigate(Screen.ForgotSuccess.route)
+            }
+            else -> {
+            }
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -77,7 +103,7 @@ fun ForgotPass(navController: NavHostController) {
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         Text(
-            text = "below to receive new password",
+            text = "below to reset new password",
             style = TextStyle(
                 color = TextColor,
                 fontSize = 16.sp
@@ -119,11 +145,13 @@ fun ForgotPass(navController: NavHostController) {
         Spacer(modifier = Modifier.height(16.dp))
         Button(
             onClick = {
-//                if (email.value == "") {
-//                    Helpers.showToast(context, "error", "Please, Enter Email")
-//                }else {
-//                }
-                navController.navigate(Screen.ForgotSuccess.route)
+                if (email.value == "") {
+                    Helpers.showToast(context, 1, "Please, Enter Email")
+                }else if(email.value.isNotEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email.value).matches()){
+                    Helpers.showToast(context,1 , "Please, Enter Valid Email")
+                }else {
+                    commonVM.forgotPass(com.kvr.user.model.ForgotPass(email = email.value))
+                }
             }, modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp)

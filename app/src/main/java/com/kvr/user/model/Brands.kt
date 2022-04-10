@@ -9,8 +9,8 @@ data class Brands (
 data class Brandsdata (
     val updated_at : String,
     val is_popular : Int,
-    val name : String,
-    val photo : String,
+    val name : String="",
+    val photo : String="",
     val created_at : String,
     val id : Int
 )

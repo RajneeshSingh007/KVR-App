@@ -157,4 +157,44 @@ class CommonVM : ViewModel() {
             _state.value = Response.Loading(false)
         }
     }
+
+    //forgot password
+    fun forgotPass(forgotPass: ForgotPass) = viewModelScope.launch {
+        _state.value = Response.Loading(true)
+        try {
+            val result  = ApiServices.forgotPasswordApi(forgotPass)
+            if(result.data?.status == true){
+                _state.value = result
+            }else{
+                result.data?.let { _state.value =  Response.Error(it.message) }
+            }
+        }catch (e: FuelError){
+            e.message?.let { _state.value = Response.Error(it) }
+            delay(16)
+            _state.value = Response.Loading(false)
+        }finally {
+            delay(16)
+            _state.value = Response.Loading(false)
+        }
+    }
+
+    //reset password
+    fun resetPass(resetForgotPass: ResetForgotPass) = viewModelScope.launch {
+        _state.value = Response.Loading(true)
+        try {
+            val result  = ApiServices.resetPasswordApi(resetForgotPass)
+            if(result.data?.status == true){
+                _state.value = result
+            }else{
+                result.data?.let { _state.value =  Response.Error(it.message) }
+            }
+        }catch (e: FuelError){
+            e.message?.let { _state.value = Response.Error(it) }
+            delay(16)
+            _state.value = Response.Loading(false)
+        }finally {
+            delay(16)
+            _state.value = Response.Loading(false)
+        }
+    }
 }

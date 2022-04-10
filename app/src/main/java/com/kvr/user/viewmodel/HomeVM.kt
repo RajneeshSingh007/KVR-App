@@ -25,6 +25,7 @@ class HomeVM : ViewModel() {
     fun fetchBrands() = viewModelScope.launch {
         _state.value = Response.Loading(true)
        try {
+           delay(20)
            val result  = ApiServices.getBrandsApi()
            if(result.data?.status == true){
                _state.value = result
@@ -43,6 +44,7 @@ class HomeVM : ViewModel() {
     fun fetchBanners() = viewModelScope.launch {
         bannerstate.value = Response.Loading(true)
         try {
+            delay(20)
             val result  = ApiServices.getBannersApi()
             if(result.data?.status == true){
                 bannerstate.value = result
@@ -61,6 +63,7 @@ class HomeVM : ViewModel() {
     fun fetchProductsType(types:Int = 1,type:String) = viewModelScope.launch {
         _pstate.value = Response.Loading(true)
         try{
+            delay(20)
             val result = ApiServices.getHomeProductApi(type)
             if(result.data?.status == true){
                 result.data.type = types

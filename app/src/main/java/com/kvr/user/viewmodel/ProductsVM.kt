@@ -1,5 +1,6 @@
 package com.kvr.user.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.kittinunf.fuel.core.FuelError
@@ -16,15 +17,19 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ProductsVM : ViewModel() {
+    //single product
     private var _state = MutableStateFlow<Response<Products>>(Response.Empty())
     val state = _state.asStateFlow()
 
+    //products list
     private var _pstate = MutableStateFlow<Response<ProductDetails>>(Response.Empty())
     val pstate = _pstate.asStateFlow()
 
+    //category
     private var _cstate = MutableStateFlow<Response<CategoryList>>(Response.Empty())
     val cstate = _cstate.asStateFlow()
 
+    //productsList
     fun fetchProductsApiCall(brandsId:Int= 0) = viewModelScope.launch {
         _state.value = Response.Loading(true)
         try{
@@ -42,6 +47,29 @@ class ProductsVM : ViewModel() {
         }
     }
 
+    //search products
+    fun fetchSearchProductsApiCall(searchProducts: SearchProducts) = viewModelScope.launch {
+        _state.value = Response.Loading(true)
+        try{
+            val result = ApiServices.searchProductsApi(searchProducts)
+            if(result.data?.status == true){
+                _state.value = Response.Success(Products(data = PData(products = result.data.data),"success", true))
+            }
+        }catch (e: FuelError){
+            e.printStackTrace()
+            e.message?.let {
+                Log.e("Error", it.toString())
+                _state.value =  Response.Error(it)
+            }
+            delay(16)
+            _state.value = Response.Loading(false)
+        }finally {
+            delay(16)
+            _state.value = Response.Loading(false)
+        }
+    }
+
+    //product details
     fun fetchProductsDetailsApiCall(productId:Int= 0) = viewModelScope.launch {
         _pstate.value = Response.Loading(true)
         try {

@@ -40,14 +40,14 @@ fun SearchByVehicle(navController: NavHostController) {
     val partCode = remember { mutableStateOf("") }
     val partName = remember { mutableStateOf("") }
 
-    LaunchedEffect(key1 = "SearchByVehicle"){
-        val current = java.util.Calendar.getInstance().get(Calendar.YEAR)
-        val yearsList = (current.minus(20)..current).map {
-            it.toString()
-        }.toList()
-        yearList.addAll(yearsList)
-        year.value = "$current"
-    }
+//    LaunchedEffect(key1 = "SearchByVehicle"){
+//        val current = java.util.Calendar.getInstance().get(Calendar.YEAR)
+//        val yearsList = (current.minus(20)..current).map {
+//            it.toString()
+//        }.toList()
+//        yearList.addAll(yearsList)
+//        year.value = "$current"
+//    }
 
     Column(modifier = Modifier
         .fillMaxWidth()
@@ -59,7 +59,7 @@ fun SearchByVehicle(navController: NavHostController) {
         Column(modifier = Modifier.padding(horizontal = 16.dp)) {
             Spacer(modifier = Modifier.padding(vertical = 10.dp))
             Text(
-                text = "Select Vehicle Maker",
+                text = "Size",
                 style = TextStyle(
                     color = HeadingColor,
                     fontSize = 14.sp
@@ -67,10 +67,31 @@ fun SearchByVehicle(navController: NavHostController) {
                 fontFamily = FontFamily(fonts = MontserratBold)
             )
             Spacer(modifier = Modifier.height(10.dp))
-            com.kvr.user.widget.DropdownMenu(items = makerList, placeholder = ""){ i, it -> maker.value = it}
+            TextField(
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(8.dp))
+                    .background(color = Color(0xFFf3f3f3))
+                    .fillMaxWidth(),
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = Color(0xFFf3f3f3),
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    textColor = Color.Black
+                ),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                value = maker.value,
+                onValueChange = { it -> maker.value = it.filter { it.isLetterOrDigit() || it == ' '} },
+                textStyle = TextStyle(
+                    color = BlackColor,
+                    fontSize = 16.sp,
+                    fontFamily = FontFamily(fonts = MontserratMedium),
+                    textAlign = TextAlign.Start
+                )
+            )
+            //com.kvr.user.widget.DropdownMenu(items = makerList, placeholder = ""){ i, it -> maker.value = it}
             Spacer(modifier = Modifier.padding(vertical = 10.dp))
             Text(
-                text = "Select Vehicle Variant",
+                text = "Engine",
                 style = TextStyle(
                     color = HeadingColor,
                     fontSize = 14.sp
@@ -78,19 +99,40 @@ fun SearchByVehicle(navController: NavHostController) {
                 fontFamily = FontFamily(fonts = MontserratBold)
             )
             Spacer(modifier = Modifier.height(10.dp))
-            com.kvr.user.widget.DropdownMenu(items = variantList, placeholder = ""){ i, it -> variant.value = it}
-            Spacer(modifier = Modifier.padding(vertical = 10.dp))
-            Text(
-                text = "Select Vehicle Year",
-                style = TextStyle(
-                    color = HeadingColor,
-                    fontSize = 14.sp
+            TextField(
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(8.dp))
+                    .background(color = Color(0xFFf3f3f3))
+                    .fillMaxWidth(),
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = Color(0xFFf3f3f3),
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    textColor = Color.Black
                 ),
-                fontFamily = FontFamily(fonts = MontserratBold)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                value = variant.value,
+                onValueChange = { it -> variant.value = it.filter { it.isLetterOrDigit() || it == ' '} },
+                textStyle = TextStyle(
+                    color = BlackColor,
+                    fontSize = 16.sp,
+                    fontFamily = FontFamily(fonts = MontserratMedium),
+                    textAlign = TextAlign.Start
+                )
             )
-            Spacer(modifier = Modifier.height(10.dp))
-            com.kvr.user.widget.DropdownMenu(items = yearList, preSelected = year.value, placeholder = ""){ i, it -> year.value = it}
+            //com.kvr.user.widget.DropdownMenu(items = variantList, placeholder = ""){ i, it -> variant.value = it}
             Spacer(modifier = Modifier.padding(vertical = 10.dp))
+//            Text(
+//                text = "Select Vehicle Year",
+//                style = TextStyle(
+//                    color = HeadingColor,
+//                    fontSize = 14.sp
+//                ),
+//                fontFamily = FontFamily(fonts = MontserratBold)
+//            )
+            //Spacer(modifier = Modifier.height(10.dp))
+            //com.kvr.user.widget.DropdownMenu(items = yearList, preSelected = year.value, placeholder = ""){ i, it -> year.value = it}
+            //Spacer(modifier = Modifier.padding(vertical = 10.dp))
             Text(
                 text = "Part Code (Optional)",
                 style = TextStyle(
@@ -111,7 +153,7 @@ fun SearchByVehicle(navController: NavHostController) {
                     unfocusedIndicatorColor = Color.Transparent,
                     textColor = Color.Black
                 ),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                 value = partCode.value,
                 onValueChange = { it -> partCode.value = it.filter { it.isLetterOrDigit() || it == ' '} },
                 textStyle = TextStyle(
@@ -142,7 +184,7 @@ fun SearchByVehicle(navController: NavHostController) {
                     unfocusedIndicatorColor = Color.Transparent,
                     textColor = Color.Black
                 ),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                 value = partName.value,
                 onValueChange = { it -> partName.value = it.filter { it.isLetterOrDigit() || it == ' '} },
                 textStyle = TextStyle(
@@ -156,7 +198,8 @@ fun SearchByVehicle(navController: NavHostController) {
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
         Button(
             onClick = {
-               // navController.navigate(Screen.AddressScreen.route)
+                val searchQuery = "${maker.value.ifEmpty { " " }}#${variant.value.ifEmpty { " " }}#${partCode.value.ifEmpty { " " }}#${partName.value.ifEmpty { " " }}"
+                navController.navigate("${Screen.ProductList.route}/Search/-1/${searchQuery}")
             },  modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),

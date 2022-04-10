@@ -38,7 +38,7 @@ data class ProductImages (
 
     val updated_at : String,
     val item_id : Int,
-    val photo : String,
+    val photo : String="",
     val created_at : String,
     val id : Int
 
@@ -48,7 +48,7 @@ data class ProductImages (
 data class Supplier (
     val updated_at : String,
     val city : String,
-    val name : String,
+    val name : String="",
     val created_at : String,
     val id : Int,
     val info : String
