@@ -29,12 +29,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
 import com.kvr.user.R
 import com.kvr.user.Screen
 import com.kvr.user.ui.theme.BgColor
 import com.kvr.user.ui.theme.WhiteColor
 import kotlinx.coroutines.delay
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun SplashScreen(navController: NavHostController, navigate:() -> Unit) {
     LaunchedEffect(key1 ="SplashScreen"){
@@ -55,9 +58,12 @@ fun SplashScreen(navController: NavHostController, navigate:() -> Unit) {
 
     ) {
         Image(
-            painter = painterResource(id = R.drawable.logo),
+            painter = rememberImagePainter(data = ""){
+                error(R.drawable.logo)
+                placeholder(R.drawable.logo)
+            },
             contentDescription = "logo",
-            modifier = Modifier.aspectRatio(0.8f),
+            modifier = Modifier.size(720.dp),
         )
     }
 

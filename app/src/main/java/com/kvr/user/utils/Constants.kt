@@ -1,6 +1,7 @@
 package com.kvr.user.utils
 
 object Constants {
+    //val DOMAIN_URL="https://thebrandie.com/demos/kvr/"
     val DOMAIN_URL="http://myappsdevelopment.in/demos/kvr/"
     val BASE_URL = "${DOMAIN_URL}api/"
     val BRANDS_IMAGE_BASE_URL = "${DOMAIN_URL}assets/images/"

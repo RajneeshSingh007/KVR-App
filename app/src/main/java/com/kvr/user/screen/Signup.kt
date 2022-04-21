@@ -181,7 +181,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                 ),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                 value = name.value,
-                onValueChange = { name.value = it.filter { it.isLetter() } },
+                onValueChange = { name.value = it.filter { it.isLetter() || it.isWhitespace() } },
                 textStyle = TextStyle(
                     color = BlackColor,
                     fontSize = 16.sp,
@@ -212,7 +212,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                 ),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                 value = lastName.value,
-                onValueChange = { lastName.value = it.filter { it.isLetter() } },
+                onValueChange = { lastName.value = it.filter { it.isLetter() || it.isWhitespace()} },
                 textStyle = TextStyle(
                     color = BlackColor,
                     fontSize = 16.sp,

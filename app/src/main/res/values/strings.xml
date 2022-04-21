@@ -15,4 +15,5 @@
     <string name="wholesaler">Wholesaler</string>
     <string name="search">Search</string>
     <string name="sign_username_error">Please, Enter Email/Phone Number</string>
+    <string name="first_name">First Name</string>
 </resources>

@@ -99,10 +99,9 @@ object ApiServices {
         return Network<CommonResponse>(CommonResponse::class.java,"/address/${addressId}", null).networkCall(methodType=2)
     }
 
-
     suspend fun addAddApi(addressesReq: AddressesReq, isUpdate: Boolean) : Response<CommonResponse> {
         if(isUpdate){
-            var body = listOf(
+            val body = listOf(
                 "first_name" to addressesReq.first_name,
                 "last_name" to addressesReq.last_name,
                 "mobile_no" to addressesReq.mobile_no,
@@ -114,7 +113,7 @@ object ApiServices {
                 )
             return Network<CommonResponse>(CommonResponse::class.java, "/update-address", body).networkCall(methodType=0)
         }else{
-            var body = listOf(
+            val body = listOf(
                 "first_name" to addressesReq.first_name,
                 "last_name" to addressesReq.last_name,
                 "mobile_no" to addressesReq.mobile_no,
@@ -131,7 +130,8 @@ object ApiServices {
         val body = listOf(
             "payment_method" to placeOrderReq.payment_method,
             "billing_address_id" to placeOrderReq.billing_address_id,
-            "shipping_address_id" to placeOrderReq.shipping_address_id
+            "shipping_address_id" to placeOrderReq.shipping_address_id,
+            "coupon_code" to placeOrderReq.couponCode
         )
         return Network<CommonResponse>(CommonResponse::class.java, "/place-the-order", body).networkCall(methodType=0)
     }

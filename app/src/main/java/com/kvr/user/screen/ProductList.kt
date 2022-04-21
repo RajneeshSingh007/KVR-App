@@ -154,8 +154,8 @@ fun ProductList(navController: NavHostController, name:String ="", id:Int=-1,sea
             TableCell(true,text = "DIN", weight = .1f,true,borders =headersBorders)
             TableCell(true,text = "Part No", weight = .1f,true,borders =headersBorders)
             TableCell(true,text = "Part Code", weight = .2f,true,borders =headersBorders)
-            TableCell(true,text = "Part Name", weight = .2f,true,borders =headersBorders)
-            TableCell(true,text = "Remarks", weight = .2f,true,borders =headersBorders)
+            TableCell(true,text = "Part Name", weight = .4f,true,borders =headersBorders)
+            //TableCell(true,text = "Remarks", weight = .2f,true,borders =headersBorders)
             TableCell(true,text = "Image", weight = .2f,true,borders = if(productsList.isEmpty()) lastItemBorders else lastRowItemBorders)
         }
         if(state.isLoading){
@@ -176,8 +176,8 @@ fun ProductList(navController: NavHostController, name:String ="", id:Int=-1,sea
                         TableCell(text = "${i +1 }", weight = .1f,borders =borders)
                         TableCell(text = "${it.part_no}", weight = .1f,borders =borders)
                         TableCell(text = Helpers.removeNull(it.part_code), weight = .2f,borders =borders)
-                        TableCell(text = Helpers.removeNull(it.name), weight = .2f,borders =borders)
-                        TableCell(text = Helpers.removeNull(it.remark), weight = .2f,borders =borders)
+                        TableCell(text = Helpers.removeNull(it.name), weight = .4f,borders =borders)
+                        //TableCell(text = Helpers.removeNull(it.remark), weight = .2f,borders =borders)
                         TableCell( weight = .2f, imageUrl = "${Constants.PRODUCTS_IMAGE_BASE_URL}/${it.photo}", isImage = true,borders =if(i == productsList.size -1) lastItemBorders else lastRowItemBorders)
                     }
                 }

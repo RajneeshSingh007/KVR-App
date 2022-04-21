@@ -144,7 +144,7 @@ fun TrackOrder(navController: NavHostController, id:Int? = -1, drawerClick: ()->
                             text = "ORDERED ITEMS",
                             style = TextStyle(
                                 color = HeadingColor,
-                                fontSize = 16.sp,
+                                fontSize = 14.sp,
                             ),
                             fontFamily = FontFamily(fonts = MontserratBold),
                             modifier = Modifier

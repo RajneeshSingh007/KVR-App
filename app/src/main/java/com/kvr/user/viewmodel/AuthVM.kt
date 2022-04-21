@@ -33,8 +33,8 @@ class AuthVM : ViewModel() {
         loginReq.device_token = appPref.getString(Constants.PREF_DEVICE_TOKEN).toString()
         try{
             _state.value = ApiServices.loginApi(loginReq = loginReq)
-            val loginData = _state.value.data?.data
-            if(loginData != null && _state.value.data?.status == true){
+            if(_state.value.data?.status == true){
+                val loginData = _state.value.data?.data as LoginData
                 appPref.putString(Constants.USER_ID, loginData.id.toString())
                 appPref.putString(Constants.ROLE_ID, loginData.role_id.toString())
                 appPref.putString(Constants.ACCESS_TOKEN, loginData.token.toString())
@@ -42,6 +42,7 @@ class AuthVM : ViewModel() {
             }else{
                 _state.value.data?.message?.let { _state.value = Response.Error(it) }
             }
+            delay(16)
             _state.value = Response.Loading(false)
         }catch (e:FuelError){
             e.message?.let { _state.value =  Response.Error(it) }
@@ -77,14 +78,16 @@ class AuthVM : ViewModel() {
         try{
             regstate.value = ApiServices.verifyOtp(otpReq)
             val appPref = BaseApplication.appContext.appPref
-            val loginData = regstate.value.data?.data
-            if(loginData != null && regstate.value.data?.status == true){
-                appPref.putString(Constants.USER_ID, loginData.toString())
-                appPref.putString(Constants.ACCESS_TOKEN, loginData.token.toString())
+            if(regstate.value.data?.status == true){
+                val regData = regstate.value.data?.data as RegisterData
+                appPref.putString(Constants.USER_ID, regData.id.toString())
+                appPref.putString(Constants.ACCESS_TOKEN, regData.token.toString())
                 appPref.putString(Constants.IS_LOGGEDIN, "true")
             }else{
                 regstate.value.data?.message?.let { regstate.value = Response.Error(it) }
             }
+            delay(16)
+            regstate.value = Response.Loading(false)
         }catch (e:FuelError){
             e.message?.let { regstate.value =  Response.Error(it) }
             delay(16)

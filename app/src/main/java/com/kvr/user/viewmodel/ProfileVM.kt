@@ -22,8 +22,14 @@ class ProfileVM : ViewModel() {
         try {
             val result  = ApiServices.getProfileApi()
             if(result.data?.status == true){
-                result.data.data.let { _state.value = Response.Success(it) }
+                result.data.data.let { _state.value = Response.Success(it as ProfileData) }
+            }else{
+                result.data?.message?.let {
+                    _state.value = Response.Error(it)
+                }
             }
+            delay(16)
+            _state.value = Response.Loading(false)
         }catch (e: FuelError){
             e.message?.let { _state.value = Response.Error(it) }
             delay(16)

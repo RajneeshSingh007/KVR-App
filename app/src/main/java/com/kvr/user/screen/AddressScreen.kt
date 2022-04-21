@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
@@ -101,11 +102,11 @@ fun AddressScreen(navController: NavHostController, name:String? = "",address:St
            navController.popBackStack()
         }, showIcon = false, title = if(id?.isNotEmpty() == true) "Edit Address" else "Add Address")
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
-        AddressItem("First Name", nameVal.value){ it ->
-            nameVal.value = it.filter { it.isLetter() }
+        AddressItem(stringResource(R.string.first_name), nameVal.value){ it ->
+            nameVal.value = it.filter { it.isLetter() || it.isWhitespace()}
         }
         AddressItem("Last Name", lNameVal.value){ it ->
-            lNameVal.value = it.filter { it.isLetter() }
+            lNameVal.value = it.filter { it.isLetter() || it.isWhitespace()}
         }
         AddressItem("Mobile Number", mobileVal.value, keyboardType = KeyboardType.Number){ it ->
             val m = it.filter { it.isDigit() }

@@ -172,10 +172,10 @@ fun ProfileScreen(navController: NavHostController,loader: (show:Boolean)-> Unit
             }
         }else{
             ProfileInfo(FaIcons.UserCircle, "First Name", name.value, Modifier.align(alignment = Alignment.CenterHorizontally),isEdit = isEdit.value, value = name.value){ it ->
-                name.value = it.filter { it.isLetter() }
+                name.value = it.filter { it.isLetter() || it.isWhitespace() }
             }
             ProfileInfo(FaIcons.UserCircle, "Last Name", lname.value, Modifier.align(alignment = Alignment.CenterHorizontally),isEdit = isEdit.value, value = lname.value){ it ->
-                lname.value = it.filter { it.isLetter() }
+                lname.value = it.filter { it.isLetter() || it.isWhitespace()}
             }
             ProfileInfo(FaIcons.Phone, "Phone", phone.value,Modifier.align(alignment = Alignment.CenterHorizontally),isEdit = isEdit.value, value = phone.value, keyboardType = KeyboardType.Number){ it ->
                 val m = it.filter { it.isDigit() }

@@ -51,10 +51,17 @@ class MyFirebaseInstanceIdService : FirebaseMessagingService() {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         // Create the pending intent to launch the activity
-        val pendingIntent = PendingIntent.getActivity(
-            this, 155, intent,
-            PendingIntent.FLAG_ONE_SHOT
-        )
+        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            PendingIntent.getActivity(
+                this, 155, intent,
+                PendingIntent.FLAG_IMMUTABLE
+            )
+        } else {
+            PendingIntent.getActivity(
+                this, 155, intent,
+                PendingIntent.FLAG_ONE_SHOT
+            )
+        }
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val defaultSoundUri: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder: NotificationCompat.Builder = NotificationCompat.Builder(this)

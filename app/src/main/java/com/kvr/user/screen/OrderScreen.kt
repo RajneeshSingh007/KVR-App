@@ -544,7 +544,7 @@ fun OrderItems(orderData: OrderData, cartData: CartData, itemClick: ()-> Unit = 
                             withStyle(
                                 style = SpanContentStyleDark
                             ) {
-                                append(" ${orderData.tracks_data[orderData.tracks_data.size-1].title}")
+                                append(" ${orderData.order_status}")
                             }
                         },
                     )
@@ -598,7 +598,7 @@ fun OrderItems(orderData: OrderData, cartData: CartData, itemClick: ()-> Unit = 
                             withStyle(
                                 style = SpanContentStyleDark
                             ) {
-                                append(" ${Utils.formatDate(orderData.tracks_data[0].created_at)}")
+                                append(" ${Utils.formatDate(orderData.created_at)}")
                             }
                         },
                     )
@@ -644,7 +644,7 @@ fun OrderItems(orderData: OrderData, cartData: CartData, itemClick: ()-> Unit = 
                                 withStyle(
                                     style = SpanContentStyle
                                 ) {
-                                    append(" 1031100")
+                                    append(" ")
                                 }
                             },
                         )
@@ -658,7 +658,7 @@ fun OrderItems(orderData: OrderData, cartData: CartData, itemClick: ()-> Unit = 
                                 withStyle(
                                     style = SpanContentStyle
                                 ) {
-                                    append(" Brand")
+                                    append(" ")
                                 }
                             },
                         )
@@ -672,7 +672,7 @@ fun OrderItems(orderData: OrderData, cartData: CartData, itemClick: ()-> Unit = 
                                 withStyle(
                                     style = SpanContentStyle
                                 ) {
-                                    append(" missing")
+                                    append(" ")
                                 }
                             },
                         )

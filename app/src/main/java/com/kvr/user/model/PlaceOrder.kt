@@ -1,3 +1,3 @@
 package com.kvr.user.model
 
-data class PlaceOrderReq(val payment_method: String,val coupon_applied: String="0",val coupon_id: String = "0", val shipping_address_id:String, val billing_address_id:String)
+data class PlaceOrderReq(val payment_method: String,val coupon_applied: String="0",val couponCode: String = "", val shipping_address_id:String, val billing_address_id:String)

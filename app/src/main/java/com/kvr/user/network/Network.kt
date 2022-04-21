@@ -42,6 +42,7 @@ class Network<T : Any> (val javaclassname: Class<T>, val url:String, val body : 
             request.header(mapOf("Authorization" to "Bearer $token"))
         }
         val (req, response, result) = request.awaitObjectResponse(DeSerializer<T>(javaclassname))
+        Log.e(TAG, "networkCall statusCode ${response.statusCode}")
         Log.e(TAG, "networkCall Req ${req.toString()}")
         Log.e(TAG, "networkCall Response ${response.toString()}")
         Log.e(TAG, "networkCall Result ${result.toString()}")

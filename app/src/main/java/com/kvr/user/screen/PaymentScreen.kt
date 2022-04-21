@@ -138,12 +138,12 @@ fun PaymentScreen(navController: NavHostController,total:String? = "", loader: (
     //process order api
     context.paymentListerner = object : PaymentListerner {
         override fun success(paymentID: String?, paymentData: PaymentData?) {
-            val couponsId = if(couponsSelected.value != null && couponsSelected.value?.id != null){
-                couponsSelected.value?.id
+            val couponCode = if(couponsSelected.value != null && couponsSelected.value?.id != null){
+                couponsSelected.value?.code_name
             }else{
-                "0"
+                ""
             }
-            commonVM.placeOrderApi(PlaceOrderReq(payment_method = "cod", coupon_id =couponsId.toString(), shipping_address_id = addressID.value, billing_address_id = addressID.value))
+            commonVM.placeOrderApi(PlaceOrderReq(payment_method = "cod", couponCode =couponCode.toString(), shipping_address_id = addressID.value, billing_address_id = addressID.value))
         }
 
         override fun failure(errorCode: Int, paymentID: String?, paymentData: PaymentData?) {

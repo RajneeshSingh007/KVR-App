@@ -44,12 +44,11 @@ data class ProfileData (
     val first_name : String,
     val email : String,
     val ship_country : String
-
 )
 
 
 data class Profile (
-    val data : ProfileData,
+    val data : Any,
     val message : String,
     val status : Boolean
 )
