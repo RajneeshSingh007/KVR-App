@@ -75,7 +75,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                 otpState.data?.let {
                     if(it.status){
                         isOtpView.value = true
-                        Helpers.showToast(context, 0, it.data.toString())
+                        Helpers.showToast(context, 0, it.message.toString())
                         otpModel.value = it
                     }
                 }
@@ -522,7 +522,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                 value = otp.value,
                 onValueChange = {
                     val filterVal = it.filter { it.isDigit() }
-                    if(filterVal.length < 5) {
+                    if(filterVal.length < 7) {
                         otp.value = filterVal
                     }
                 },

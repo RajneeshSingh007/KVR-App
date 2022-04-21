@@ -38,7 +38,7 @@ class Network<T : Any> (val javaclassname: Class<T>, val url:String, val body : 
             }
         }
         //don't include token for register/login/otp/reset/forgot
-        if(token != null && url != "/login" && url != "/signup"  && url != "/verify-otp"  && url != "/resend-otp" && url != "/forgot-password" && url != "/reset-password"){
+        if(token != null && url != "/mobile-login" && url != "/verify-mobile-login" && url != "/signup"  && url != "/verify-otp"  && url != "/resend-otp" && url != "/forgot-password" && url != "/reset-password"){
             request.header(mapOf("Authorization" to "Bearer $token"))
         }
         val (req, response, result) = request.awaitObjectResponse(DeSerializer<T>(javaclassname))

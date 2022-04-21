@@ -9,13 +9,19 @@ import com.github.kittinunf.result.failure
 import com.kvr.user.BaseApplication
 import com.kvr.user.model.*
 import com.kvr.user.utils.Helpers
+import com.razorpay.OTP
 import java.io.File
 
 object ApiServices {
 
+    suspend fun loginOTPApi(loginReq: LoginReq) : Response<Otp> {
+        val body = listOf("mobile_number" to loginReq.mobile_number.toString())
+        return Network<Otp>(Otp::class.java,"/mobile-login", body).networkCall(false,0)
+    }
+
     suspend fun loginApi(loginReq: LoginReq) : Response<Login> {
-        val body = listOf("username" to loginReq.username.toString(), "password" to loginReq.password.toString(),"device_token" to loginReq.device_token.toString())
-        return Network<Login>(Login::class.java,"/login", body).networkCall(false,0)
+        val body = listOf("mobile_number" to loginReq.mobile_number.toString(), "otp" to loginReq.otp.toString(),"device_token" to loginReq.device_token.toString())
+        return Network<Login>(Login::class.java,"/verify-mobile-login", body).networkCall(false,0)
     }
 
     suspend fun resendOtpApi(otpReq: OtpReq) : Response<Otp> {

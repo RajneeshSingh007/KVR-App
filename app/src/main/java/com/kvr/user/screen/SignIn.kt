@@ -39,6 +39,8 @@ import com.kvr.user.ui.theme.*
 import com.kvr.user.utils.Helpers
 import com.kvr.user.viewmodel.AuthVM
 import com.kvr.user.model.LoginReq
+import com.kvr.user.model.Otp
+import com.kvr.user.model.OtpReq
 import com.kvr.user.network.Response
 
 @Composable
@@ -49,20 +51,60 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
     val username = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
     val showVisualPass = remember { mutableStateOf<VisualTransformation>(PasswordVisualTransformation()) }
+    val otpState = authVM._otpState.collectAsState().value
+    val otpModel = remember { mutableStateOf<Otp?>(null) }
+    val isOtpView = remember { mutableStateOf(false) }
+    val otp = remember { mutableStateOf("") }
+
+    //otp state change
+    LaunchedEffect(key1 = otpState){
+        when (otpState) {
+            is Response.Loading -> {
+                loader(otpState.isLoading)
+            }
+            is Response.Error -> {
+                Helpers.showToast(context, 1, otpState.error)
+            }
+            is Response.Success -> {
+                otpState.data?.let {
+                    if(it.status){
+                        isOtpView.value = true
+                        Helpers.showToast(context, 0, it.message.toString())
+                        otpModel.value = it
+                    }
+                }
+            }
+            else -> {
+            }
+        }
+    }
 
     fun login(){
         if (username.value.isEmpty()) {
             Helpers.showToast(context, 1, context.getString(R.string.sign_username_error))
-        }else if(username.value.contains('@') && !Patterns.EMAIL_ADDRESS.matcher(username.value).matches()){
-            Helpers.showToast(context,1 , context.getString(R.string.valid_email))
-        }else if (password.value.isEmpty()) {
+        }
+//        else if(username.value.contains('@') && !Patterns.EMAIL_ADDRESS.matcher(username.value).matches()){
+//            Helpers.showToast(context,1 , context.getString(R.string.valid_email))
+//        }
+        else if (isOtpView.value && password.value.isEmpty()) {
             Helpers.showToast(
                 context,
                 1,
                 context.getString(R.string.valid_password)
             )
+        } else if (isOtpView.value && otpModel.value != null && otpModel.value?.data.toString() != password.value) {
+            Helpers.showToast(
+                context,
+                1,
+                "Failed to match OTP Number"
+            )
         } else {
-            authVM.loginApiCall(LoginReq(username = username.value, password = password.value))
+            val loginReq = LoginReq(mobile_number = username.value, otp = password.value)
+            if(isOtpView.value){
+                authVM.loginApiCall(loginReq)
+            }else{
+                authVM.loginOtpCall(loginReq)
+            }
         }
     }
 
@@ -146,9 +188,14 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                 unfocusedIndicatorColor = Color.Transparent,
                 textColor = Color.Black
             ),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             value = username.value,
-            onValueChange = { it -> username.value = it.filter { it.isLetterOrDigit() || it == '@' || it == '.' } },
+            onValueChange = {it ->
+                val phoneParse = it.filter { it.isDigit() }
+                if(phoneParse.length < 11){
+                    username.value =  phoneParse
+                }
+            },
             textStyle = TextStyle(
                 color = BlackColor,
                 fontSize = 16.sp,
@@ -157,44 +204,104 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
             )
         )
         Spacer(modifier = Modifier.height(10.dp))
-        Text(
-            text = stringResource(R.string.sinin_placholder_password),
-            style = TextStyle(
-                color = TextColor,
-                fontSize = 14.sp
-            ),
-            fontFamily = FontFamily(fonts = MontserratRegular)
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        TextField(
-            modifier = Modifier
-                .clip(shape = RoundedCornerShape(8.dp))
-                .background(color = Color(0xFFf3f3f3))
-                .fillMaxWidth(),
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color(0xFFf3f3f3),
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                textColor = Color.Black
-            ),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            value = password.value,
-            onValueChange = { password.value = it },
-            textStyle = TextStyle(
-                color = BlackColor,
-                fontSize = 16.sp,
-                fontFamily = FontFamily(fonts = MontserratMedium),
-                textAlign = TextAlign.Start
-            ),
-            visualTransformation = showVisualPass.value,
-            trailingIcon={
-                IconButton(onClick = {
-                    showVisualPass.value = if (showVisualPass.value == PasswordVisualTransformation()) VisualTransformation.None else PasswordVisualTransformation()
-                }) {
-                    FaIcon(faIcon = if(showVisualPass.value == VisualTransformation.None) FaIcons.EyeSlashRegular else FaIcons.EyeRegular, size = 20.dp, tint = TextColor)
+        if(isOtpView.value){
+            Text(
+                text = stringResource(R.string.otp_number),
+                style = TextStyle(
+                    color = TextColor,
+                    fontSize = 14.sp
+                ),
+                fontFamily = FontFamily(fonts = MontserratRegular)
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            TextField(
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(8.dp))
+                    .background(color = Color(0xFFf3f3f3))
+                    .fillMaxWidth(),
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = Color(0xFFf3f3f3),
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    textColor = Color.Black
+                ),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                value = password.value,
+                onValueChange = {it ->
+                    val phoneParse = it.filter { it.isDigit() }
+                    if(phoneParse.length < 7){
+                        password.value =  phoneParse
+                    }
+                },
+                textStyle = TextStyle(
+                    color = BlackColor,
+                    fontSize = 16.sp,
+                    fontFamily = FontFamily(fonts = MontserratMedium),
+                    textAlign = TextAlign.Start
+                ),
+//                visualTransformation = showVisualPass.value,
+//                trailingIcon={
+//                    IconButton(onClick = {
+//                        showVisualPass.value = if (showVisualPass.value == PasswordVisualTransformation()) VisualTransformation.None else PasswordVisualTransformation()
+//                    }) {
+//                        FaIcon(faIcon = if(showVisualPass.value == VisualTransformation.None) FaIcons.EyeSlashRegular else FaIcons.EyeRegular, size = 20.dp, tint = TextColor)
+//                    }
+//                }
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center){
+                Box(modifier = Modifier
+                    .weight(0.1f)
+                    .align(alignment = Alignment.CenterVertically)){
+                }
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center, modifier = Modifier.weight(3.0f)){
+                    Text(
+                        buildAnnotatedString {
+                            withStyle(
+                                style = SpanStyle(
+                                    color = TextColor,
+                                    fontSize = 14.sp,
+                                    fontFamily = FontFamily(fonts = MontserratRegular),
+                                )
+                            ) {
+                                append(stringResource(R.string.failed_otp))
+                            }
+                        },
+                        style = TextStyle(
+                            textAlign = TextAlign.Start
+                        ),
+                        modifier = Modifier.align(alignment = Alignment.CenterVertically)
+                    )
+                    Text(
+                        buildAnnotatedString {
+                            withStyle(
+                                style = SpanStyle(
+                                    color = PrimaryColor,
+                                    fontSize = 14.sp,
+                                    fontFamily = FontFamily(fonts = MontserratBold)
+                                ),
+
+                                ) {
+                                append(stringResource(R.string.resend_otp))
+                            }
+                        },
+                        modifier = Modifier
+                            .align(alignment = Alignment.CenterVertically)
+                            .clickable {
+                                val loginReq = LoginReq(mobile_number = username.value, otp = password.value)
+                                authVM.loginOtpCall(loginReq)
+                            },
+                        style = TextStyle(
+                            textAlign = TextAlign.Start
+                        )
+                    )
+                }
+                Box(modifier = Modifier
+                    .weight(0.1f)
+                    .align(alignment = Alignment.CenterVertically)){
                 }
             }
-        )
+        }
         Spacer(modifier = Modifier.height(30.dp))
         Button(
             onClick = {

@@ -11,13 +11,13 @@
     <string name="distributor">పంపిణీదారు</string>
     <string name="wholesaler">టోకు వ్యాపారి</string>
     <string name="search">శోధన</string>
-    <string name="sign_username_error">దయచేసి, ఇమెయిల్/ఫోన్ నంబర్‌ని నమోదు చేయండి</string>
+    <string name="sign_username_error">దయచేసి, ఫోన్ నంబర్‌ని నమోదు చేయండి</string>
     <string name="first_name">మొదటి పేరు</string>
     <string name="valid_email">దయచేసి, చెల్లుబాటు అయ్యే ఇమెయిల్‌ను నమోదు చేయండి</string>
-    <string name="valid_password">దయచేసి, పాస్‌వర్డ్‌ని నమోదు చేయండి</string>
+    <string name="valid_password">దయచేసి, పాస్‌వర్డ్‌ని నమోదు OTP</string>
     <string name="sign_in_heading">దయచేసి దిగువన వివరాలను నమోదు చేయండి</string>
     <string name="sign_in_heading1">కొనసాగించడానికి</string>
-    <string name="sinin_placholder_email">ఇమెయిల్/ఫోన్ నంబర్</string>
+    <string name="sinin_placholder_email">ఫోన్ నంబర్</string>
     <string name="sinin_placholder_password">పాస్‌వర్డ్</string>
     <string name="login">లాగిన్</string>
     <string name="forgot_pass">పాస్‌వర్డ్ మర్చిపోయారా?</string>

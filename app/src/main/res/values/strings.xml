@@ -12,13 +12,13 @@
     <string name="distributor">Distributor</string>
     <string name="wholesaler">Wholesaler</string>
     <string name="search">Search</string>
-    <string name="sign_username_error">Please, Enter Email/Phone Number</string>
+    <string name="sign_username_error">Please, Enter Phone Number</string>
     <string name="first_name">First Name</string>
     <string name="valid_email">Please, Enter Valid Email</string>
-    <string name="valid_password">Please, Enter Password</string>
+    <string name="valid_password">Please, Enter OTP</string>
     <string name="sign_in_heading">Please enter the details below</string>
     <string name="sign_in_heading1">to continue</string>
-    <string name="sinin_placholder_email">Email/Phone Number</string>
+    <string name="sinin_placholder_email">Phone Number</string>
     <string name="sinin_placholder_password">Password</string>
     <string name="login">Login</string>
     <string name="forgot_pass">Forgot Password?</string>
