@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -108,12 +109,12 @@ fun TrackOrder(navController: NavHostController, id:Int? = -1, drawerClick: ()->
             }
         }else{
 
-            AddressInfo( title = "Shipping Details:", showEditBtn = false, name = "${shippingAddress.value?.first_name} ${shippingAddress.value?.last_name} - ${shippingAddress.value?.mobile_no}", address = "${shippingAddress.value?.address1}, ${shippingAddress.value?.address2}, ${shippingAddress.value?.city} - ${shippingAddress.value?.zipcode}")
+            AddressInfo( title = stringResource(R.string.shipping_details), showEditBtn = false, name = "${shippingAddress.value?.first_name} ${shippingAddress.value?.last_name} - ${shippingAddress.value?.mobile_no}", address = "${shippingAddress.value?.address1}, ${shippingAddress.value?.address2}, ${shippingAddress.value?.city} - ${shippingAddress.value?.zipcode}")
 
             //AddressInfo( title = "Billing Address:", showEditBtn = false, name = "${billingAddress.value?.first_name} ${billingAddress.value?.last_name} - ${billingAddress.value?.mobile_no}", address = "${billingAddress.value?.address1}, ${billingAddress.value?.address2}, ${billingAddress.value?.city} - ${billingAddress.value?.zipcode}")
 
             Text(
-                text = "Order Status:",
+                text = stringResource(R.string.orders_status),
                 style = TextStyle(
                     color = HeadingColor,
                     fontSize = 16.sp,
@@ -141,7 +142,7 @@ fun TrackOrder(navController: NavHostController, id:Int? = -1, drawerClick: ()->
                         .padding(8.dp)
                         .fillMaxWidth()) {
                         Text(
-                            text = "ORDERED ITEMS",
+                            text = stringResource(R.string.ordered_items),
                             style = TextStyle(
                                 color = HeadingColor,
                                 fontSize = 14.sp,
@@ -171,7 +172,7 @@ fun TrackOrder(navController: NavHostController, id:Int? = -1, drawerClick: ()->
             shape = RoundedCornerShape(0.dp)
         ) {
             Text(
-                text = "Back to Home",
+                text = stringResource(id = R.string.b2home),
                 style = TextStyle(
                     color = WhiteColor,
                     fontSize = 16.sp
@@ -268,7 +269,7 @@ fun OrderStatus(id:Int? = -1, trackData:List<Tracks_data> ){
                             withStyle(
                                 style = SpanHeadingStyle
                             ) {
-                                append("Order ID:")
+                                append(stringResource(R.string.order_id))
                             }
                             withStyle(
                                 style = SpanContentStyle
@@ -282,7 +283,7 @@ fun OrderStatus(id:Int? = -1, trackData:List<Tracks_data> ){
                             withStyle(
                                 style = SpanHeadingStyle
                             ) {
-                                append("Status:")
+                                append(stringResource(id = R.string.status))
                             }
                             withStyle(
                                 style = SpanContentStyle
@@ -294,7 +295,7 @@ fun OrderStatus(id:Int? = -1, trackData:List<Tracks_data> ){
                 }
 
                 Spacer(modifier = Modifier.padding(top = 10.dp))
-                OrderStatusItem("Order placed on", showline = true, Utils.formatDate(trackData[0].created_at), PrimaryColor, PrimaryColor)
+                OrderStatusItem(stringResource(R.string.order_placed_on), showline = true, Utils.formatDate(trackData[0].created_at), PrimaryColor, PrimaryColor)
                 trackData.forEachIndexed { index, tracksData ->
                     OrderStatusItem(tracksData.title,index != trackData.size -1, Utils.formatDate(tracksData.updated_at), if(index == trackData.size -1) Color(0xFFbfbfbf) else PrimaryColor, if(index == trackData.size -1) WhiteColor else  PrimaryColor)
                 }

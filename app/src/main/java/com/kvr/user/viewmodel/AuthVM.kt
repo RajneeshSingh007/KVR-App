@@ -10,6 +10,7 @@ import com.kvr.user.model.*
 import com.kvr.user.network.ApiServices
 import com.kvr.user.network.Response
 import com.kvr.user.utils.Constants
+import com.kvr.user.utils.Helpers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,8 +34,8 @@ class AuthVM : ViewModel() {
         loginReq.device_token = appPref.getString(Constants.PREF_DEVICE_TOKEN).toString()
         try{
             _state.value = ApiServices.loginApi(loginReq = loginReq)
+            val loginData = _state.value.data?.data as LoginData
             if(_state.value.data?.status == true){
-                val loginData = _state.value.data?.data as LoginData
                 appPref.putString(Constants.USER_ID, loginData.id.toString())
                 appPref.putString(Constants.ROLE_ID, loginData.role_id.toString())
                 appPref.putString(Constants.ACCESS_TOKEN, loginData.token.toString())
@@ -42,10 +43,11 @@ class AuthVM : ViewModel() {
             }else{
                 _state.value.data?.message?.let { _state.value = Response.Error(it) }
             }
-            delay(16)
-            _state.value = Response.Loading(false)
         }catch (e:FuelError){
-            e.message?.let { _state.value =  Response.Error(it) }
+            val data = Helpers.getErrorMsg(e.response.data)
+            if(data.isNotEmpty()){
+                _state.value =  Response.Error(data)
+            }
             delay(16)
             _state.value = Response.Loading(false)
         }
@@ -67,7 +69,10 @@ class AuthVM : ViewModel() {
                 otpstate.value =  Response.Error(errorMsg.toString())
             }
         }catch (e:FuelError){
-            e.message?.let { otpstate.value =  Response.Error(it) }
+            val data = Helpers.getErrorMsg(e.response.data)
+            if(data.isNotEmpty()){
+                _state.value =  Response.Error(data)
+            }
             delay(16)
             otpstate.value = Response.Loading(false)
         }
@@ -78,18 +83,19 @@ class AuthVM : ViewModel() {
         try{
             regstate.value = ApiServices.verifyOtp(otpReq)
             val appPref = BaseApplication.appContext.appPref
+            val regData = regstate.value.data?.data as RegisterData
             if(regstate.value.data?.status == true){
-                val regData = regstate.value.data?.data as RegisterData
                 appPref.putString(Constants.USER_ID, regData.id.toString())
                 appPref.putString(Constants.ACCESS_TOKEN, regData.token.toString())
                 appPref.putString(Constants.IS_LOGGEDIN, "true")
             }else{
                 regstate.value.data?.message?.let { regstate.value = Response.Error(it) }
             }
-            delay(16)
-            regstate.value = Response.Loading(false)
         }catch (e:FuelError){
-            e.message?.let { regstate.value =  Response.Error(it) }
+            val data = Helpers.getErrorMsg(e.response.data)
+            if(data.isNotEmpty()){
+                _state.value =  Response.Error(data)
+            }
             delay(16)
             regstate.value = Response.Loading(false)
         }
@@ -111,7 +117,10 @@ class AuthVM : ViewModel() {
                 otpstate.value =  Response.Error(errorMsg.toString())
             }
         }catch (e:FuelError){
-            e.message?.let { otpstate.value =  Response.Error(it) }
+            val data = Helpers.getErrorMsg(e.response.data)
+            if(data.isNotEmpty()){
+                _state.value =  Response.Error(data)
+            }
             delay(16)
             otpstate.value = Response.Loading(false)
         }

@@ -57,14 +57,16 @@ fun SplashScreen(navController: NavHostController, navigate:() -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally,
 
     ) {
-        Image(
-            painter = rememberImagePainter(data = ""){
-                error(R.drawable.logo)
-                placeholder(R.drawable.logo)
-            },
-            contentDescription = "logo",
-            modifier = Modifier.size(720.dp),
-        )
+        Row(modifier = Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center){
+            Image(
+                painter = rememberImagePainter(data = ""){
+                    error(R.drawable.logo_big)
+                    placeholder(R.drawable.logo_big)
+                },
+                contentDescription = "logo",
+                modifier = Modifier.size(200.dp),
+            )
+        }
     }
 
 }

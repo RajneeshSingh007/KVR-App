@@ -8,11 +8,13 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kvr.user.R
 import com.kvr.user.model.CouponsData
 import com.kvr.user.ui.theme.*
 
@@ -32,7 +34,7 @@ fun CartPriceInfo(itemPrice:String= "00",shippingPrice:String="00", totalPrice:S
                     .padding(12.dp)
                     .fillMaxHeight()) {
                 Text(
-                    text = "Pricing:",
+                    text = stringResource(R.string.pricing),
                     style = TextStyle(
                         color = BlackColor,
                         fontSize = 16.sp,
@@ -43,7 +45,7 @@ fun CartPriceInfo(itemPrice:String= "00",shippingPrice:String="00", totalPrice:S
                 Spacer(modifier = Modifier.padding(vertical = 4.dp))
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                     Text(
-                        text = "Price (2 items)",
+                        text = stringResource(R.string.price_items),
                         style = TextStyle(
                             color = PrimaryColor,
                             fontSize = 13.sp,
@@ -64,7 +66,7 @@ fun CartPriceInfo(itemPrice:String= "00",shippingPrice:String="00", totalPrice:S
                 Spacer(modifier = Modifier.padding(vertical = 2.dp))
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                     Text(
-                        text = "Shipping Charges",
+                        text = stringResource(R.string.shipping_charges),
                         style = TextStyle(
                             color = PrimaryColor,
                             fontSize = 13.sp,
@@ -86,7 +88,7 @@ fun CartPriceInfo(itemPrice:String= "00",shippingPrice:String="00", totalPrice:S
                     Spacer(modifier = Modifier.padding(vertical = 2.dp))
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                         Text(
-                            text = "Coupon Applied",
+                            text = stringResource(R.string.coupon_applied),
                             style = TextStyle(
                                 color = PrimaryColor,
                                 fontSize = 13.sp,
@@ -108,7 +110,7 @@ fun CartPriceInfo(itemPrice:String= "00",shippingPrice:String="00", totalPrice:S
                 Spacer(modifier = Modifier.padding(vertical = 2.dp))
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                     Text(
-                        text = "Total",
+                        text = stringResource(R.string.total),
                         style = TextStyle(
                             color = PrimaryColor,
                             fontSize = 15.sp,

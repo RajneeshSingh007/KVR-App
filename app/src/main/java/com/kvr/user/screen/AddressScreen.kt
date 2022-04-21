@@ -105,28 +105,28 @@ fun AddressScreen(navController: NavHostController, name:String? = "",address:St
         AddressItem(stringResource(R.string.first_name), nameVal.value){ it ->
             nameVal.value = it.filter { it.isLetter() || it.isWhitespace()}
         }
-        AddressItem("Last Name", lNameVal.value){ it ->
+        AddressItem(stringResource(R.string.last_name), lNameVal.value){ it ->
             lNameVal.value = it.filter { it.isLetter() || it.isWhitespace()}
         }
-        AddressItem("Mobile Number", mobileVal.value, keyboardType = KeyboardType.Number){ it ->
+        AddressItem(stringResource(R.string.phone_number), mobileVal.value, keyboardType = KeyboardType.Number){ it ->
             val m = it.filter { it.isDigit() }
             if(m.length < 11){
                 mobileVal.value = m
             }
         }
-        AddressItem("Address 1", addressVal.value){
+        AddressItem(stringResource(R.string.add1), addressVal.value){
             addressVal.value = it
         }
-        AddressItem("Address 2", addressVal2.value){
+        AddressItem(stringResource(R.string.add2), addressVal2.value){
             addressVal2.value = it
         }
-        AddressItem("City", city.value,){
+        AddressItem(stringResource(R.string.city), city.value,){
             city.value = it
         }
 //        AddressItem(FaIcons.Building, "State", "Delhi",Modifier.align(alignment = Alignment.CenterHorizontally),isEdit = isEdit.value, value = state.value){ it ->
 //            state.value = it
 //        }
-        AddressItem("PinCode", pincode.value, keyboardType = KeyboardType.Number){ it ->
+        AddressItem(stringResource(R.string.pincode), pincode.value, keyboardType = KeyboardType.Number){ it ->
             val m = it.filter { it.isDigit() }
             if(m.length < 7){
                 pincode.value = m
@@ -172,7 +172,7 @@ fun AddressScreen(navController: NavHostController, name:String? = "",address:St
             shape = RoundedCornerShape(0.dp)
         ) {
             Text(
-                text = "Save Address",
+                text = stringResource(R.string.save_add),
                 style = TextStyle(
                     color = WhiteColor,
                     fontSize = 15.sp
@@ -218,7 +218,7 @@ fun AddressItem(heading:String ="", value:String = "", keyboardType:KeyboardType
             ),
             placeholder={
                 Text(
-                    text = "Enter ${heading}",
+                    text = stringResource(id = R.string.enter) + " ${heading}",
                     style = TextStyle(
                         color = Color(0xFF565a5e),
                         fontSize = 14.sp,

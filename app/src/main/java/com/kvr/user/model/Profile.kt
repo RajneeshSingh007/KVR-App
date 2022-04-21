@@ -48,7 +48,7 @@ data class ProfileData (
 
 
 data class Profile (
-    val data : Any,
+    val data : ProfileData,
     val message : String,
     val status : Boolean
 )

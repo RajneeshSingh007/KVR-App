@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
@@ -22,6 +23,7 @@ import androidx.navigation.NavHostController
 import com.guru.fontawesomecomposelib.FaIcon
 import com.guru.fontawesomecomposelib.FaIcons
 import com.kvr.user.BaseApplication
+import com.kvr.user.R
 import com.kvr.user.Screen
 import com.kvr.user.model.*
 import com.kvr.user.network.Response
@@ -86,7 +88,7 @@ fun CouponScreen(navController: NavHostController) {
             navController = navController, drawerClick = {
                 //drawerClick()
                 navController.popBackStack()
-            }, showIcon = false, title = "Coupons"
+            }, showIcon = false, title = stringResource(R.string.cpn)
         )
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
         if(state.isLoading){

@@ -7,6 +7,7 @@ import com.github.kittinunf.fuel.core.FuelError
 import com.kvr.user.model.*
 import com.kvr.user.network.ApiServices
 import com.kvr.user.network.Response
+import com.kvr.user.utils.Helpers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -28,7 +29,10 @@ class CommonVM : ViewModel() {
                 result.data?.let { _state.value =  Response.Error(it.message) }
             }
         }catch (e: FuelError){
-            e.message?.let { _state.value =  Response.Error(it) }
+            val data = Helpers.getErrorMsg(e.response.data)
+            if(data.isNotEmpty()){
+                _state.value =  Response.Error(data)
+            }
             delay(16)
             _state.value = Response.Loading(false)
         }finally {
@@ -48,7 +52,10 @@ class CommonVM : ViewModel() {
                 result.data?.let { _state.value =  Response.Error(it.message) }
             }
         }catch (e:FuelError){
-            e.message?.let { _state.value =  Response.Error(it) }
+            val data = Helpers.getErrorMsg(e.response.data)
+            if(data.isNotEmpty()){
+                _state.value =  Response.Error(data)
+            }
             delay(16)
             _state.value = Response.Loading(false)
         }finally {
@@ -69,7 +76,10 @@ class CommonVM : ViewModel() {
                 result.data?.let { _state.value =  Response.Error(it.message) }
             }
         }catch (e:FuelError){
-            e.message?.let { _state.value =  Response.Error(it) }
+            val data = Helpers.getErrorMsg(e.response.data)
+            if(data.isNotEmpty()){
+                _state.value =  Response.Error(data)
+            }
             delay(16)
             _state.value = Response.Loading(false)
         }finally {
@@ -89,7 +99,10 @@ class CommonVM : ViewModel() {
                 result.data?.let { _state.value =  Response.Error(it.message) }
             }
         }catch (e:FuelError){
-            e.message?.let { _state.value =  Response.Error(it) }
+            val data = Helpers.getErrorMsg(e.response.data)
+            if(data.isNotEmpty()){
+                _state.value =  Response.Error(data)
+            }
             delay(16)
             _state.value = Response.Loading(false)
         }finally {
@@ -109,7 +122,10 @@ class CommonVM : ViewModel() {
                 result.data?.let { _state.value =  Response.Error(it.message) }
             }
         }catch (e:FuelError){
-            e.message?.let { _state.value =  Response.Error(it) }
+            val data = Helpers.getErrorMsg(e.response.data)
+            if(data.isNotEmpty()){
+                _state.value =  Response.Error(data)
+            }
             delay(16)
             _state.value = Response.Loading(false)
         }finally {
@@ -129,7 +145,10 @@ class CommonVM : ViewModel() {
                 result.data?.let { _state.value =  Response.Error(it.message) }
             }
         }catch (e:FuelError){
-            e.message?.let { _state.value =  Response.Error(it) }
+            val data = Helpers.getErrorMsg(e.response.data)
+            if(data.isNotEmpty()){
+                _state.value =  Response.Error(data)
+            }
             delay(16)
             _state.value = Response.Loading(false)
         }finally {
@@ -149,7 +168,10 @@ class CommonVM : ViewModel() {
                 result.data?.let { _state.value =  Response.Error(it.message) }
             }
         }catch (e: FuelError){
-            e.message?.let { _state.value = Response.Error(it) }
+            val data = Helpers.getErrorMsg(e.response.data)
+            if(data.isNotEmpty()){
+                _state.value =  Response.Error(data)
+            }
             delay(16)
             _state.value = Response.Loading(false)
         }finally {
@@ -169,7 +191,10 @@ class CommonVM : ViewModel() {
                 result.data?.let { _state.value =  Response.Error(it.message) }
             }
         }catch (e: FuelError){
-            e.message?.let { _state.value = Response.Error(it) }
+            val data = Helpers.getErrorMsg(e.response.data)
+            if(data.isNotEmpty()){
+                _state.value =  Response.Error(data)
+            }
             delay(16)
             _state.value = Response.Loading(false)
         }finally {
@@ -189,7 +214,10 @@ class CommonVM : ViewModel() {
                 result.data?.let { _state.value =  Response.Error(it.message) }
             }
         }catch (e: FuelError){
-            e.message?.let { _state.value = Response.Error(it) }
+            val data = Helpers.getErrorMsg(e.response.data)
+            if(data.isNotEmpty()){
+                _state.value =  Response.Error(data)
+            }
             delay(16)
             _state.value = Response.Loading(false)
         }finally {

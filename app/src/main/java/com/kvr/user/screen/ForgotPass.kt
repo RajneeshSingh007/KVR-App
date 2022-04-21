@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
@@ -94,7 +95,7 @@ fun ForgotPass(navController: NavHostController,loader: (show:Boolean)-> Unit = 
         )
         Spacer(modifier = Modifier.height(30.dp))
         Text(
-            text = "Please enter your registered email",
+            text = stringResource(R.string.email_heading1),
             style = TextStyle(
                 color = TextColor,
                 fontSize = 16.sp
@@ -103,7 +104,7 @@ fun ForgotPass(navController: NavHostController,loader: (show:Boolean)-> Unit = 
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         Text(
-            text = "below to reset new password",
+            text = stringResource(R.string.email_heading2),
             style = TextStyle(
                 color = TextColor,
                 fontSize = 16.sp
@@ -113,7 +114,7 @@ fun ForgotPass(navController: NavHostController,loader: (show:Boolean)-> Unit = 
         )
         Spacer(modifier = Modifier.height(30.dp))
         Text(
-            text = "Email",
+            text = stringResource(R.string.email),
             style = TextStyle(
                 color = TextColor,
                 fontSize = 14.sp
@@ -146,9 +147,9 @@ fun ForgotPass(navController: NavHostController,loader: (show:Boolean)-> Unit = 
         Button(
             onClick = {
                 if (email.value == "") {
-                    Helpers.showToast(context, 1, "Please, Enter Email")
+                    Helpers.showToast(context, 1, context.getString(R.string.sign_username_error))
                 }else if(email.value.isNotEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email.value).matches()){
-                    Helpers.showToast(context,1 , "Please, Enter Valid Email")
+                    Helpers.showToast(context,1 , context.getString(R.string.valid_email))
                 }else {
                     commonVM.forgotPass(com.kvr.user.model.ForgotPass(email = email.value))
                 }
@@ -158,7 +159,7 @@ fun ForgotPass(navController: NavHostController,loader: (show:Boolean)-> Unit = 
                 .clip(shape = RoundedCornerShape(8.dp)),
         ) {
             Text(
-                text = "Send",
+                text = stringResource(R.string.send),
                 style = TextStyle(
                     color = WhiteColor,
                     fontSize = 16.sp

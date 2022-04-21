@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -218,10 +219,10 @@ fun PaymentScreen(navController: NavHostController,total:String? = "", loader: (
         Header(navController =navController,drawerClick = {
             //drawerClick()
             navController.popBackStack()
-        }, showIcon = false, title ="Payments")
+        }, showIcon = false, title = stringResource(R.string.payments))
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
         Text(
-            text = "UPI Options:",
+            text = stringResource(R.string.upi_options),
             style = TextStyle(
                 color = HeadingColor,
                 fontSize = 16.sp,
@@ -256,7 +257,7 @@ fun PaymentScreen(navController: NavHostController,total:String? = "", loader: (
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
 
         Text(
-            text = "Cards & More:",
+            text = stringResource(R.string.cards),
             style = TextStyle(
                 color = HeadingColor,
                 fontSize = 16.sp,
@@ -309,7 +310,7 @@ fun PaymentScreen(navController: NavHostController,total:String? = "", loader: (
                     .clip(shape = RoundedCornerShape(8.dp)),
             ) {
                 Text(
-                    text = "Apply Coupons",
+                    text = stringResource(R.string.apply_coupons),
                     style = TextStyle(
                         color = WhiteColor,
                         fontSize = 16.sp
@@ -336,7 +337,7 @@ fun PaymentScreen(navController: NavHostController,total:String? = "", loader: (
             shape = RoundedCornerShape(0.dp)
         ) {
             Text(
-                text = "Confirm Payment",
+                text = stringResource(R.string.cnfrm_payment),
                 style = TextStyle(
                     color = WhiteColor,
                     fontSize = 16.sp

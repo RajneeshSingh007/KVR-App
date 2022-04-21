@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -53,12 +54,12 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
         if (username.value.isEmpty()) {
             Helpers.showToast(context, 1, context.getString(R.string.sign_username_error))
         }else if(username.value.contains('@') && !Patterns.EMAIL_ADDRESS.matcher(username.value).matches()){
-            Helpers.showToast(context,1 , "Please, Enter Valid Email")
+            Helpers.showToast(context,1 , context.getString(R.string.valid_email))
         }else if (password.value.isEmpty()) {
             Helpers.showToast(
                 context,
                 1,
-                "Please, Enter Password"
+                context.getString(R.string.valid_password)
             )
         } else {
             authVM.loginApiCall(LoginReq(username = username.value, password = password.value))
@@ -107,7 +108,7 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
         )
         Spacer(modifier = Modifier.height(30.dp))
         Text(
-            text = "Please enter the details below",
+            text = stringResource(R.string.sign_in_heading),
             style = TextStyle(
                 color = TextColor,
                 fontSize = 16.sp
@@ -116,7 +117,7 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         Text(
-            text = "to continue",
+            text = stringResource(R.string.sign_in_heading1),
             style = TextStyle(
                 color = TextColor,
                 fontSize = 16.sp
@@ -126,7 +127,7 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
         )
         Spacer(modifier = Modifier.height(30.dp))
         Text(
-            text = "Email/Phone Number",
+            text = stringResource(R.string.sinin_placholder_email),
             style = TextStyle(
                 color = TextColor,
                 fontSize = 14.sp
@@ -157,7 +158,7 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Password",
+            text = stringResource(R.string.sinin_placholder_password),
             style = TextStyle(
                 color = TextColor,
                 fontSize = 14.sp
@@ -204,7 +205,7 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                 .clip(shape = RoundedCornerShape(8.dp)),
         ) {
             Text(
-                text = "Login",
+                text = stringResource(R.string.login),
                 style = TextStyle(
                     color = WhiteColor,
                     fontSize = 16.sp
@@ -222,7 +223,7 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                         fontFamily = FontFamily(fonts = MontserratRegular),
                     )
                 ) {
-                    append("Forgot Password?")
+                    append(stringResource(R.string.forgot_pass))
                 }
             },
             style = TextStyle(
@@ -244,7 +245,7 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
             }
             Box(modifier = Modifier.weight(0.5f), contentAlignment = Alignment.Center){
                 Text(
-                    text = "OR",
+                    text = stringResource(R.string.or),
                     style = TextStyle(
                         color = HeadingColor,
                         fontSize = 15.sp
@@ -262,17 +263,20 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
         Spacer(modifier = Modifier.height(24.dp))
         OutLinedBtn(modifier = Modifier
             .fillMaxWidth()
-            .align(alignment = Alignment.CenterHorizontally),icon = R.drawable.profile,btnText = "Login as Customer", click = {
+            .align(alignment = Alignment.CenterHorizontally),icon = R.drawable.profile,btnText = stringResource(
+                        R.string.login_customer), click = {
             login()
         })
         OutLinedBtn(modifier = Modifier
             .fillMaxWidth()
-            .align(alignment = Alignment.CenterHorizontally),icon = R.drawable.distributor,btnText = "Login as Distributor", click = {
+            .align(alignment = Alignment.CenterHorizontally),icon = R.drawable.distributor,btnText = stringResource(
+                        R.string.login_distributor), click = {
             login()
         })
         OutLinedBtn(modifier = Modifier
             .fillMaxWidth()
-            .align(alignment = Alignment.CenterHorizontally),icon = R.drawable.wholesale,btnText = "Login as Wholesaler", click = {
+            .align(alignment = Alignment.CenterHorizontally),icon = R.drawable.wholesale,btnText = stringResource(
+                        R.string.login_wholesaler), click = {
             login()
         })
         Spacer(modifier = Modifier.height(20.dp))
@@ -291,7 +295,7 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                                 fontFamily = FontFamily(fonts = MontserratRegular),
                             )
                         ) {
-                            append("Don't have an account?")
+                            append(stringResource(R.string.no_account))
                         }
                     },
                     style = TextStyle(
@@ -309,7 +313,7 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                             ),
 
                             ) {
-                            append(" Sign Up")
+                            append(stringResource(R.string.sign_up))
                         }
                     },
                     modifier = Modifier

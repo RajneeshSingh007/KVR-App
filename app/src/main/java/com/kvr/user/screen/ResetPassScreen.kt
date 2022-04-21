@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -82,11 +83,11 @@ fun ResetPassScreen(navController: NavHostController,loader: (show:Boolean)-> Un
         Header(navController =navController,drawerClick = {
             //drawerClick()
             navController.popBackStack()
-        }, title = "Change Password", showIcon = false)
+        }, title = stringResource(R.string.change_pass), showIcon = false)
        Column(Modifier.padding(horizontal = 16.dp)) {
            Spacer(modifier = Modifier.height(30.dp))
            Text(
-               text = "New Password",
+               text = stringResource(R.string.new_password),
                style = TextStyle(
                    color = TextColor,
                    fontSize = 14.sp
@@ -124,7 +125,7 @@ fun ResetPassScreen(navController: NavHostController,loader: (show:Boolean)-> Un
                },
                placeholder={
                    Text(
-                       text = "Enter New Password",
+                       text = stringResource(R.string.enter_password_placeholder),
                        style = TextStyle(
                            color = Color(0xFF565a5e),
                            fontSize = 14.sp,
@@ -137,7 +138,7 @@ fun ResetPassScreen(navController: NavHostController,loader: (show:Boolean)-> Un
            )
            Spacer(modifier = Modifier.height(16.dp))
            Text(
-               text = "Confirm Password",
+               text = stringResource(R.string.confirm_pass),
                style = TextStyle(
                    color = TextColor,
                    fontSize = 14.sp
@@ -175,7 +176,7 @@ fun ResetPassScreen(navController: NavHostController,loader: (show:Boolean)-> Un
                },
                placeholder={
                    Text(
-                       text = "Enter Confirm Password",
+                       text = stringResource(R.string.enter_cnfm_pass),
                        style = TextStyle(
                            color = Color(0xFF565a5e),
                            fontSize = 14.sp,
@@ -212,7 +213,7 @@ fun ResetPassScreen(navController: NavHostController,loader: (show:Boolean)-> Un
                    .clip(shape = RoundedCornerShape(8.dp)),
            ) {
                Text(
-                   text = "Submit",
+                   text = stringResource(R.string.submit),
                    style = TextStyle(
                        color = WhiteColor,
                        fontSize = 16.sp

@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
@@ -182,14 +183,15 @@ fun OrderScreen(navController: NavHostController, screenType:Int? = -1,loader: (
         .background(color = WhiteColor)){
         Header(navController =navController,drawerClick = {
             navController.popBackStack()
-        }, showIcon = false, title = if(screenType == 0) "Checkout" else if(screenType  == 1){
-            "My Orders" }  else "Cart")
+        }, showIcon = false, title = if(screenType == 0) stringResource(R.string.checkout) else if(screenType  == 1){
+            stringResource(R.string.my_orders) }  else stringResource(R.string.carts)
+                    )
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
 
         if(screenType  == 0){
             AddressInfo( editClick = {
               navController.navigate(Screen.MyAddress.route)
-            }, title="Shipping Address:", name = addressName.value, address = address.value)
+            }, title= stringResource(R.string.shipping_add), name = addressName.value, address = address.value)
         }
 
         if(state.isLoading || orderState.isLoading){
@@ -244,7 +246,7 @@ fun OrderScreen(navController: NavHostController, screenType:Int? = -1,loader: (
         }else{
             Spacer(modifier = Modifier.padding(vertical = 36.dp))
             Text(
-                text = if(screenType == 1) "No orders found..." else "No cart items found...",
+                text = if(screenType == 1) stringResource(R.string.no_orders) else stringResource(R.string.no_carts),
                 style = TextStyle(
                     color = BlackColor,
                     fontSize = 13.sp,
@@ -278,11 +280,11 @@ fun OrderScreen(navController: NavHostController, screenType:Int? = -1,loader: (
         ) {
             Text(
                 text = if(screenType  == 0){
-                    "Go to Payment"
+                    stringResource(R.string.g2payment)
                 } else if(screenType  == 1){
-                    "Back to Home"
+                    stringResource(id = R.string.b2home)
                 } else {
-                    "Checkout"
+                    stringResource(id = R.string.checkout)
                 },
                 style = TextStyle(
                     color = WhiteColor,
@@ -348,7 +350,7 @@ fun CartItems(cartData: CartData, showVerified:Boolean = true, showCartBtn:Boole
                                 withStyle(
                                     style = SpanHeadingStyle
                                 ) {
-                                    append("Part Number:")
+                                    append(stringResource(R.string.part_numbers))
                                 }
                                 withStyle(
                                     style = SpanContentStyle
@@ -363,7 +365,7 @@ fun CartItems(cartData: CartData, showVerified:Boolean = true, showCartBtn:Boole
                                     withStyle(
                                         style = SpanHeadingStyle
                                     ) {
-                                        append("Brand:")
+                                        append(stringResource(R.string.brands))
                                     }
                                     withStyle(
                                         style = SpanContentStyle
@@ -379,7 +381,7 @@ fun CartItems(cartData: CartData, showVerified:Boolean = true, showCartBtn:Boole
                                     withStyle(
                                         style = SpanHeadingStyle
                                     ) {
-                                        append("Supplier:")
+                                        append(stringResource(R.string.suppliers))
                                     }
                                     withStyle(
                                         style = SpanContentStyle
@@ -411,7 +413,7 @@ fun CartItems(cartData: CartData, showVerified:Boolean = true, showCartBtn:Boole
                         if(showVerified){
                             FaIcon(faIcon = FaIcons.CheckCircle, size = 20.dp, tint = PrimaryColor)
                             Text(
-                                text = "Verified",
+                                text = stringResource(R.string.verified),
                                 style = TextStyle(
                                     color = PrimaryColor,
                                     fontSize = 14.sp,
@@ -426,7 +428,7 @@ fun CartItems(cartData: CartData, showVerified:Boolean = true, showCartBtn:Boole
                         .fillMaxWidth()
                         .weight(0.58f), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = if(showCartBtn) Arrangement.Center else Arrangement.Start) {
                         Text(
-                            text = "QTY:",
+                            text = stringResource(R.string.qty),
                             style = TextStyle(
                                 color = PrimaryColor,
                                 fontSize = 14.sp,
@@ -525,7 +527,7 @@ fun OrderItems(orderData: OrderData, cartData: CartData, itemClick: ()-> Unit = 
                             withStyle(
                                 style = SpanHeadingStyle
                             ) {
-                                append("Order:")
+                                append(stringResource(R.string.orders))
                             }
                             withStyle(
                                 style = SpanContentStyleDark
@@ -539,7 +541,7 @@ fun OrderItems(orderData: OrderData, cartData: CartData, itemClick: ()-> Unit = 
                             withStyle(
                                 style = SpanHeadingStyle
                             ) {
-                                append("Status:")
+                                append(stringResource(R.string.status))
                             }
                             withStyle(
                                 style = SpanContentStyleDark
@@ -559,7 +561,7 @@ fun OrderItems(orderData: OrderData, cartData: CartData, itemClick: ()-> Unit = 
                             withStyle(
                                 style = SpanHeadingStyle
                             ) {
-                                append("Delivery By:")
+                                append(stringResource(R.string.del_by))
                             }
                             withStyle(
                                 style = SpanContentStyleDark
@@ -573,7 +575,7 @@ fun OrderItems(orderData: OrderData, cartData: CartData, itemClick: ()-> Unit = 
                             withStyle(
                                 style = SpanHeadingStyle
                             ) {
-                                append("Total:")
+                                append(stringResource(id = R.string.total))
                             }
                             withStyle(
                                 style = SpanContentStyleDark
@@ -593,7 +595,7 @@ fun OrderItems(orderData: OrderData, cartData: CartData, itemClick: ()-> Unit = 
                             withStyle(
                                 style = SpanHeadingStyle
                             ) {
-                                append("Placed on:")
+                                append(stringResource(R.string.placed_on))
                             }
                             withStyle(
                                 style = SpanContentStyleDark
@@ -639,7 +641,7 @@ fun OrderItems(orderData: OrderData, cartData: CartData, itemClick: ()-> Unit = 
                                 withStyle(
                                     style = SpanHeadingStyle
                                 ) {
-                                    append("Part Code:")
+                                    append(stringResource(id = R.string.part_codes))
                                 }
                                 withStyle(
                                     style = SpanContentStyle
@@ -653,7 +655,7 @@ fun OrderItems(orderData: OrderData, cartData: CartData, itemClick: ()-> Unit = 
                                 withStyle(
                                     style = SpanHeadingStyle
                                 ) {
-                                    append("Brand:")
+                                    append(stringResource(id = R.string.brands))
                                 }
                                 withStyle(
                                     style = SpanContentStyle
@@ -667,7 +669,7 @@ fun OrderItems(orderData: OrderData, cartData: CartData, itemClick: ()-> Unit = 
                                 withStyle(
                                     style = SpanHeadingStyle
                                 ) {
-                                    append("Remark:")
+                                    append(stringResource(R.string.remarks))
                                 }
                                 withStyle(
                                     style = SpanContentStyle
@@ -689,7 +691,7 @@ fun OrderItems(orderData: OrderData, cartData: CartData, itemClick: ()-> Unit = 
                             shape = RoundedCornerShape(2.dp)
                         ) {
                             Text(
-                                text ="Track",
+                                text = stringResource(R.string.tracks),
                                 style = TextStyle(
                                     color = PrimaryColor,
                                     fontSize = 15.sp

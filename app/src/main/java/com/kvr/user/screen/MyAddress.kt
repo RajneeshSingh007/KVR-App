@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
@@ -22,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.kvr.user.BaseApplication
+import com.kvr.user.R
 import com.kvr.user.Screen
 import com.kvr.user.model.AddressData
 import com.kvr.user.model.AddressList
@@ -103,7 +105,7 @@ fun MyAddress(navController: NavHostController,loader: (show:Boolean)-> Unit = {
             navController = navController, drawerClick = {
                 //drawerClick()
                 navController.popBackStack()
-            }, showIcon = false, title = "My Addresses"
+            }, showIcon = false, title = stringResource(R.string.my_address)
         )
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
         if(state.isLoading){
@@ -143,7 +145,7 @@ fun MyAddress(navController: NavHostController,loader: (show:Boolean)-> Unit = {
             shape = RoundedCornerShape(0.dp)
         ) {
             Text(
-                text = "Add New address",
+                text = stringResource(R.string.add_new_address),
                 style = TextStyle(
                     color = WhiteColor,
                     fontSize = 15.sp

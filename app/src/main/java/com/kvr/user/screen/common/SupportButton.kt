@@ -41,7 +41,7 @@ fun SupportButton(widthFraction:Float = 0.8f, modifier: Modifier = Modifier.heig
             text = stringResource(R.string.support),
             style = TextStyle(
                 color = WhiteColor,
-                fontSize = 15.sp
+                fontSize = 14.sp
             ),
             fontFamily = FontFamily(fonts = MontserratMedium),
         )

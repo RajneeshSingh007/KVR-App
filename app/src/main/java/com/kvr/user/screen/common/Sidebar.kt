@@ -34,6 +34,10 @@ fun Sidebar(navController: NavHostController,langClick: ()-> Unit = {},drawerCli
         .background(color = AccentColor)){
         Image(painter = painterResource(R.drawable.header_logo), contentDescription = "header_logo", modifier = Modifier
             .size(200.dp)
+            .clickable {
+                drawerClick()
+                navController.navigate(route = Screen.HomeScreen.route)
+            }
             .padding(start = 16.dp))
     }
     Column(modifier = Modifier
@@ -82,7 +86,7 @@ fun Sidebar(navController: NavHostController,langClick: ()-> Unit = {},drawerCli
         verticalAlignment = Alignment.CenterVertically){
             Image(painter = painterResource(R.drawable.expert), contentDescription = "expert", modifier = Modifier.size(30.dp))
             Spacer(modifier = Modifier.padding(horizontal = 8.dp))
-            SupportButton()
+            SupportButton(modifier = Modifier.height(IntrinsicSize.Max))
         }
     }
 }

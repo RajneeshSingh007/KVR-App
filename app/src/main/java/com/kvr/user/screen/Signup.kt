@@ -141,7 +141,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
         if(!isOtpView.value){
             Spacer(modifier = Modifier.height(30.dp))
             Text(
-                text = "Please enter the details below",
+                text = stringResource(R.string.signup_heading),
                 style = TextStyle(
                     color = TextColor,
                     fontSize = 16.sp
@@ -150,7 +150,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
             Text(
-                text = "to create an account",
+                text = stringResource(R.string.signup_heading1),
                 style = TextStyle(
                     color = TextColor,
                     fontSize = 16.sp
@@ -160,7 +160,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
             )
             Spacer(modifier = Modifier.height(30.dp))
             Text(
-                text = "Name",
+                text = stringResource(R.string.name),
                 style = TextStyle(
                     color = TextColor,
                     fontSize = 14.sp
@@ -191,7 +191,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
-                text = "Last Name",
+                text = stringResource(R.string.last_name),
                 style = TextStyle(
                     color = TextColor,
                     fontSize = 14.sp
@@ -222,7 +222,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
-                text = "Phone Number",
+                text = stringResource(R.string.phone_number),
                 style = TextStyle(
                     color = TextColor,
                     fontSize = 14.sp
@@ -258,7 +258,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
-                text = "Email",
+                text = stringResource(R.string.email),
                 style = TextStyle(
                     color = TextColor,
                     fontSize = 14.sp
@@ -289,7 +289,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "Password",
+                text = stringResource(R.string.password),
                 style = TextStyle(
                     color = TextColor,
                     fontSize = 14.sp
@@ -328,7 +328,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "Confirm Password",
+                text = stringResource(R.string.confirm_password),
                 style = TextStyle(
                     color = TextColor,
                     fontSize = 14.sp
@@ -367,7 +367,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "Select Role",
+                text = stringResource(R.string.select_role),
                 style = TextStyle(
                     color = TextColor,
                     fontSize = 14.sp
@@ -416,7 +416,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                     .clip(shape = RoundedCornerShape(8.dp)),
             ) {
                 Text(
-                    text = "Sign Up",
+                    text = stringResource(R.string.signup_btn),
                     style = TextStyle(
                         color = WhiteColor,
                         fontSize = 16.sp
@@ -440,7 +440,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                                     fontFamily = FontFamily(fonts = MontserratRegular),
                                 )
                             ) {
-                                append("Already have an account?")
+                                append(stringResource(R.string.already_account))
                             }
                         },
                         style = TextStyle(
@@ -458,7 +458,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                                 ),
 
                                 ) {
-                                append(" Login")
+                                append(stringResource(R.string.login_space))
                             }
                         },
                         modifier = Modifier
@@ -480,7 +480,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
             //otp view
             Spacer(modifier = Modifier.height(30.dp))
             Text(
-                text = "Please enter the OTP (One Time Password)",
+                text = stringResource(R.string.otp_heading),
                 style = TextStyle(
                     color = TextColor,
                     fontSize = 16.sp
@@ -489,7 +489,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
             Text(
-                text = "sent on your mobile number",
+                text = stringResource(R.string.otp_heading1),
                 style = TextStyle(
                     color = TextColor,
                     fontSize = 16.sp
@@ -499,7 +499,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
             )
             Spacer(modifier = Modifier.height(30.dp))
             Text(
-                text = "OTP Number",
+                text = stringResource(R.string.otp_number),
                 style = TextStyle(
                     color = TextColor,
                     fontSize = 14.sp
@@ -554,7 +554,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                     .clip(shape = RoundedCornerShape(8.dp)),
             ) {
                 Text(
-                    text = "Submit",
+                    text = stringResource(R.string.submit),
                     style = TextStyle(
                         color = WhiteColor,
                         fontSize = 16.sp
@@ -578,7 +578,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                                     fontFamily = FontFamily(fonts = MontserratRegular),
                                 )
                             ) {
-                                append("Failed to get OTP?")
+                                append(stringResource(R.string.failed_otp))
                             }
                         },
                         style = TextStyle(
@@ -596,7 +596,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                                 ),
 
                                 ) {
-                                append(" Resend OTP")
+                                append(stringResource(R.string.resend_otp))
                             }
                         },
                         modifier = Modifier

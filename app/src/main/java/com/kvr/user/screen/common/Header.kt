@@ -3,6 +3,7 @@ package com.kvr.user.screen.common
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -37,7 +38,9 @@ fun Header(navController: NavHostController? = null, title: String = "KVR", show
                 }
                 if(showIcon){
                     Image(painter = painterResource(R.drawable.header_logo), contentDescription = "header_logo",
-                        modifier = Modifier.width(148.dp).height(56.dp))
+                        modifier = Modifier.width(148.dp).height(56.dp).clickable {
+                            navController?.navigate(route = Screen.HomeScreen.route)
+                        })
                 }else{
                     Text(text = title,
                         modifier = Modifier.padding(start = 8.dp),

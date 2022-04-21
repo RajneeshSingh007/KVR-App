@@ -73,6 +73,7 @@ fun MainScreen() {
                 FuelManager.instance.baseHeaders = mapOf("Authorization" to "Bearer ${token}")
                 isLoggedIn = value.toBoolean()
             }
+            showLoader.value = false
             navHostController.navigate(if(isLoggedIn) Screen.HomeScreen.route else Screen.SignIn.route){
                 popUpTo(Screen.SplashScreen.route){
                     inclusive = true
@@ -83,6 +84,7 @@ fun MainScreen() {
 
     //check user logout
     val logoutUser = {
+        showLoader.value = false
         isLoggedIn.value = false
         scope.launch {
             pref.putString(Constants.IS_LOGGEDIN, "false")

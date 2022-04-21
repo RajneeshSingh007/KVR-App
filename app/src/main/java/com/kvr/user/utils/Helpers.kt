@@ -9,6 +9,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.DisplayMetrics
+import android.util.Log
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.content.res.ResourcesCompat
 import com.google.gson.Gson
@@ -20,6 +21,7 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
+import org.json.JSONObject
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
 import java.util.*
@@ -126,4 +128,20 @@ object Helpers {
         }
     }
 
+    /**
+     * api error Msg
+     */
+    fun getErrorMsg(byteArray: ByteArray) : String{
+        if(byteArray.isNotEmpty()){
+            val data = String(byteArray)
+            val jsonObject = JSONObject(data)
+            //Log.e("ErrorJSON", "${jsonObject.toString()}")
+            return if(!jsonObject.optBoolean("status")){
+                jsonObject.optString("message", "")
+            }else{
+                "Something went wrong"
+            }
+        }
+        return "Something went wrong"
+    }
 }

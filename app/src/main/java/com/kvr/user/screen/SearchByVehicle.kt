@@ -55,11 +55,11 @@ fun SearchByVehicle(navController: NavHostController) {
         .background(color = WhiteColor)) {
         Header(navController =navController,drawerClick = {
             navController.popBackStack()
-        }, showIcon = false, title = "Search By Vehicle")
+        }, showIcon = false, title = stringResource(R.string.search_by_vehicle))
         Column(modifier = Modifier.padding(horizontal = 16.dp)) {
             Spacer(modifier = Modifier.padding(vertical = 10.dp))
             Text(
-                text = "Size",
+                text = stringResource(R.string.size_search),
                 style = TextStyle(
                     color = HeadingColor,
                     fontSize = 14.sp
@@ -91,7 +91,7 @@ fun SearchByVehicle(navController: NavHostController) {
             //com.kvr.user.widget.DropdownMenu(items = makerList, placeholder = ""){ i, it -> maker.value = it}
             Spacer(modifier = Modifier.padding(vertical = 10.dp))
             Text(
-                text = "Engine",
+                text = stringResource(R.string.enginer_search),
                 style = TextStyle(
                     color = HeadingColor,
                     fontSize = 14.sp
@@ -134,7 +134,7 @@ fun SearchByVehicle(navController: NavHostController) {
             //com.kvr.user.widget.DropdownMenu(items = yearList, preSelected = year.value, placeholder = ""){ i, it -> year.value = it}
             //Spacer(modifier = Modifier.padding(vertical = 10.dp))
             Text(
-                text = "Part Code (Optional)",
+                text = stringResource(R.string.partcode_search),
                 style = TextStyle(
                     color = HeadingColor,
                     fontSize = 14.sp
@@ -165,7 +165,7 @@ fun SearchByVehicle(navController: NavHostController) {
             )
             Spacer(modifier = Modifier.padding(vertical = 10.dp))
             Text(
-                text = "Part Name (Optional)",
+                text = stringResource(R.string.partname_search),
                 style = TextStyle(
                     color = HeadingColor,
                     fontSize = 14.sp
@@ -206,7 +206,7 @@ fun SearchByVehicle(navController: NavHostController) {
             shape = RoundedCornerShape(0.dp)
         ) {
             Text(
-                text = "Search",
+                text = stringResource(R.string.search),
                 style = TextStyle(
                     color = WhiteColor,
                     fontSize = 15.sp

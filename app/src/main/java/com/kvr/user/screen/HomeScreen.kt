@@ -21,6 +21,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
@@ -159,7 +160,7 @@ fun HomeScreen(navController: NavHostController,drawerClick: ()-> Unit = {}) {
         }
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
         Text(
-            text = "Explore from Brands",
+            text = stringResource(R.string.home_heading1),
             style = TextStyle(
                 color = HeadingColor,
                 fontSize = 16.sp,
@@ -206,7 +207,7 @@ fun HomeScreen(navController: NavHostController,drawerClick: ()-> Unit = {}) {
         )
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
         Text(
-            text = "Popular on KVR",
+            text = stringResource(R.string.home_heading2),
             style = TextStyle(
                 color = HeadingColor,
                 fontSize = 16.sp,
@@ -230,7 +231,7 @@ fun HomeScreen(navController: NavHostController,drawerClick: ()-> Unit = {}) {
         }
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
         Text(
-            text = "Deals for Today",
+            text = stringResource(R.string.home_heading3),
             style = TextStyle(
                 color = HeadingColor,
                 fontSize = 16.sp,
@@ -252,7 +253,7 @@ fun HomeScreen(navController: NavHostController,drawerClick: ()-> Unit = {}) {
         ) {
             FaIcon(faIcon = FaIcons.Clock, size = 16.dp, tint = Color.White, modifier = Modifier.padding(end = 8.dp))
             Text(
-                text = "22h 18m",
+                text = stringResource(R.string.deal_times),
                 style = TextStyle(
                     color = WhiteColor,
                     fontSize = 14.sp

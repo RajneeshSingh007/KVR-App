@@ -151,12 +151,12 @@ fun ProductList(navController: NavHostController, name:String ="", id:Int=-1,sea
                 .background(color = Color(0xFFe1e1e1))
                 .fillMaxWidth()
                 .height(56.dp)) {
-            TableCell(true,text = "DIN", weight = .1f,true,borders =headersBorders)
-            TableCell(true,text = "Part No", weight = .1f,true,borders =headersBorders)
-            TableCell(true,text = "Part Code", weight = .2f,true,borders =headersBorders)
-            TableCell(true,text = "Part Name", weight = .4f,true,borders =headersBorders)
+            TableCell(true,text = stringResource(R.string.din), weight = .1f,true,borders =headersBorders)
+            TableCell(true,text = stringResource(R.string.part_number), weight = .1f,true,borders =headersBorders)
+            TableCell(true,text = stringResource(R.string.part_code), weight = .2f,true,borders =headersBorders)
+            TableCell(true,text = stringResource(R.string.part_name), weight = .4f,true,borders =headersBorders)
             //TableCell(true,text = "Remarks", weight = .2f,true,borders =headersBorders)
-            TableCell(true,text = "Image", weight = .2f,true,borders = if(productsList.isEmpty()) lastItemBorders else lastRowItemBorders)
+            TableCell(true,text = stringResource(R.string.image), weight = .2f,true,borders = if(productsList.isEmpty()) lastItemBorders else lastRowItemBorders)
         }
         if(state.isLoading){
             Box(modifier = Modifier

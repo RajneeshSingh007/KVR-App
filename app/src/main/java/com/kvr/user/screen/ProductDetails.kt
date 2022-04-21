@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
@@ -178,7 +179,7 @@ fun ProductDetails(navController: NavHostController, name:String ="", id:Int=-1,
                             modifier = Modifier.size(24.dp)
                         )
                         Text(
-                            text = "Delivery in 5-7 days",
+                            text = stringResource(R.string.delivery_text),
                             style = TextStyle(
                                 color = TextColor,
                                 fontSize = 13.sp,
@@ -190,7 +191,7 @@ fun ProductDetails(navController: NavHostController, name:String ="", id:Int=-1,
                     }
                     Spacer(modifier = Modifier.padding(vertical = 10.dp))
                     Text(
-                        text = "Details:",
+                        text = stringResource(R.string.details),
                         style = TextStyle(
                             color = BlackColor,
                             fontSize = 15.sp,
@@ -204,7 +205,7 @@ fun ProductDetails(navController: NavHostController, name:String ="", id:Int=-1,
                             withStyle(
                                 style = SpanHeadingStyle
                             ) {
-                                append("Part Code:")
+                                append(stringResource(R.string.part_codes))
                             }
                             withStyle(
                                 style = SpanContentStyle
@@ -220,7 +221,7 @@ fun ProductDetails(navController: NavHostController, name:String ="", id:Int=-1,
                             withStyle(
                                 style = SpanHeadingStyle
                             ) {
-                                append("Part Name:")
+                                append(stringResource(R.string.part_names))
                             }
                             withStyle(
                                 style = SpanContentStyle
@@ -236,7 +237,7 @@ fun ProductDetails(navController: NavHostController, name:String ="", id:Int=-1,
                             withStyle(
                                 style = SpanHeadingStyle
                             ) {
-                                append("Remark:")
+                                append(stringResource(R.string.remarks))
                             }
                             withStyle(
                                 style = SpanContentStyle
@@ -252,7 +253,7 @@ fun ProductDetails(navController: NavHostController, name:String ="", id:Int=-1,
                             withStyle(
                                 style = SpanHeadingStyle
                             ) {
-                                append("Description:")
+                                append(stringResource(R.string.desc))
                             }
                             withStyle(
                                 style = SpanContentStyle
@@ -265,7 +266,7 @@ fun ProductDetails(navController: NavHostController, name:String ="", id:Int=-1,
                 }
                 Spacer(modifier = Modifier.padding(vertical = 10.dp))
                 Text(
-                    text = "More Products from",
+                    text = stringResource(R.string.more_product),
                     style = TextStyle(
                         color = HeadingColor,
                         fontSize = 16.sp,
@@ -288,7 +289,7 @@ fun ProductDetails(navController: NavHostController, name:String ="", id:Int=-1,
                 )
                 Spacer(modifier = Modifier.padding(vertical = 8.dp))
                 Text(
-                    text = "Specifications:",
+                    text = stringResource(R.string.specs),
                     style = TextStyle(
                         color = HeadingColor,
                         fontSize = 16.sp,
@@ -333,7 +334,7 @@ fun ProductDetails(navController: NavHostController, name:String ="", id:Int=-1,
                     shape = RoundedCornerShape(0.dp)
                 ) {
                     Text(
-                        text = "Buy Now",
+                        text = stringResource(R.string.buy_now),
                         style = TextStyle(
                             color = WhiteColor,
                             fontSize = 16.sp

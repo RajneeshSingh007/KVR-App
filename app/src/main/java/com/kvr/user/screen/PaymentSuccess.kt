@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -36,7 +37,7 @@ fun PaymentSuccess(navController: NavHostController, amount: String?="0.00") {
         Spacer(modifier = Modifier.padding(vertical = 56.dp))
         Image(painter = painterResource(R.drawable.success), contentDescription = "success", modifier = Modifier.size(200.dp))
         Text(
-            text = "Payment Success",
+            text = stringResource(R.string.payment_success),
             style = TextStyle(
                 color = HeadingColor,
                 fontSize = 16.sp,
@@ -54,7 +55,7 @@ fun PaymentSuccess(navController: NavHostController, amount: String?="0.00") {
                         fontFamily = FontFamily(fonts = MontserratRegular),
                     )
                 ) {
-                    append("Your payment of")
+                    append(stringResource(R.string.payment_success_heading1))
                 }
                 withStyle(
                     style = SpanStyle(
@@ -72,7 +73,7 @@ fun PaymentSuccess(navController: NavHostController, amount: String?="0.00") {
                         fontFamily = FontFamily(fonts = MontserratRegular)
                     )
                 ) {
-                    append("was successfully completed. ")
+                    append(stringResource(R.string.payment_success_heading2))
                 }
             },
             style = TextStyle(
@@ -110,7 +111,7 @@ fun PaymentSuccess(navController: NavHostController, amount: String?="0.00") {
 
             ) {
                 Text(
-                    text = "Track Order Status",
+                    text = stringResource(R.string.track_order_status),
                     style = TextStyle(
                         color = PrimaryColor,
                         fontSize = 14.sp
@@ -137,7 +138,7 @@ fun PaymentSuccess(navController: NavHostController, amount: String?="0.00") {
 
             ) {
                 Text(
-                    text = "Back to Home",
+                    text = stringResource(R.string.b2home),
                     style = TextStyle(
                         color = PrimaryColor,
                         fontSize = 14.sp

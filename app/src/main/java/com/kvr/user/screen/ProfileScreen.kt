@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
@@ -128,7 +129,7 @@ fun ProfileScreen(navController: NavHostController,loader: (show:Boolean)-> Unit
         .background(color = WhiteColor)) {
         Header(navController =navController,drawerClick = {
             navController.popBackStack()
-        }, showIcon = false, title = "My Profile")
+        }, showIcon = false, title = stringResource(R.string.my_profile))
         Box(modifier= Modifier
             .background(color = AccentColor)
             .fillMaxWidth()
@@ -148,7 +149,8 @@ fun ProfileScreen(navController: NavHostController,loader: (show:Boolean)-> Unit
                             if (isEdit.value) {
                                 launcher.launch("image/*")
                             }
-                        }.clip(CircleShape),
+                        }
+                        .clip(CircleShape),
                     contentScale = ContentScale.Fit
                 )
                 Spacer(modifier = Modifier.padding(vertical = 10.dp))
@@ -171,19 +173,19 @@ fun ProfileScreen(navController: NavHostController,loader: (show:Boolean)-> Unit
                 CircularProgressIndicator()
             }
         }else{
-            ProfileInfo(FaIcons.UserCircle, "First Name", name.value, Modifier.align(alignment = Alignment.CenterHorizontally),isEdit = isEdit.value, value = name.value){ it ->
+            ProfileInfo(FaIcons.UserCircle, stringResource(R.string.name), name.value, Modifier.align(alignment = Alignment.CenterHorizontally),isEdit = isEdit.value, value = name.value){ it ->
                 name.value = it.filter { it.isLetter() || it.isWhitespace() }
             }
-            ProfileInfo(FaIcons.UserCircle, "Last Name", lname.value, Modifier.align(alignment = Alignment.CenterHorizontally),isEdit = isEdit.value, value = lname.value){ it ->
+            ProfileInfo(FaIcons.UserCircle, stringResource(R.string.last_name), lname.value, Modifier.align(alignment = Alignment.CenterHorizontally),isEdit = isEdit.value, value = lname.value){ it ->
                 lname.value = it.filter { it.isLetter() || it.isWhitespace()}
             }
-            ProfileInfo(FaIcons.Phone, "Phone", phone.value,Modifier.align(alignment = Alignment.CenterHorizontally),isEdit = isEdit.value, value = phone.value, keyboardType = KeyboardType.Number){ it ->
+            ProfileInfo(FaIcons.Phone, stringResource(R.string.phone_number), phone.value,Modifier.align(alignment = Alignment.CenterHorizontally),isEdit = isEdit.value, value = phone.value, keyboardType = KeyboardType.Number){ it ->
                 val m = it.filter { it.isDigit() }
                 if(m.length < 11){
                     phone.value = m
                 }
             }
-            ProfileInfo(FaIcons.Envelope, "Email", email.value,Modifier.align(alignment = Alignment.CenterHorizontally),isEdit = isEdit.value, value = email.value, keyboardType = KeyboardType.Email){
+            ProfileInfo(FaIcons.Envelope, stringResource(R.string.email), email.value,Modifier.align(alignment = Alignment.CenterHorizontally),isEdit = isEdit.value, value = email.value, keyboardType = KeyboardType.Email){
                 email.value = it
             }
             //      ProfileInfo(FaIcons.Home, "Address", "54, Charu Villas, Hadapsar Udaipur - 197796",Modifier.align(alignment = Alignment.CenterHorizontally),isEdit = isEdit.value, value = address.value){
@@ -211,7 +213,7 @@ fun ProfileScreen(navController: NavHostController,loader: (show:Boolean)-> Unit
             shape = RoundedCornerShape(if(!isEdit.value) 2.dp else 0.dp)
         ) {
             Text(
-                text = if(!isEdit.value) "Edit Profile" else "Save Profile",
+                text = if(!isEdit.value) stringResource(R.string.edit_profile) else stringResource(R.string.save_profile),
                 style = TextStyle(
                     color = if(!isEdit.value) PrimaryColor else WhiteColor,
                     fontSize = 15.sp

@@ -3,7 +3,7 @@ package com.kvr.user.model
 
 data class LoginReq(var username: String = "", var password: String = "",var device_token: String = "")
 
-data class Login (     val data : Any,
+data class Login (     val data : LoginData,
                        val status : Boolean,
                        val message : String)
 
