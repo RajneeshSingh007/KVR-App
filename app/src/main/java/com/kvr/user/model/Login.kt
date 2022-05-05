@@ -1,7 +1,7 @@
 package com.kvr.user.model
 
 
-data class LoginReq(var mobile_number: String = "", var otp: String = "",var device_token: String = "")
+data class LoginReq(var mobile_number: String = "",var whatsapp_number: String = "", var role_id: Int = 1,  var otp: String = "",var device_token: String = "")
 
 data class Login (val data : LoginData,
                        val status : Boolean,

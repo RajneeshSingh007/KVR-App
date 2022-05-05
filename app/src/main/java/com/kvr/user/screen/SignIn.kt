@@ -42,6 +42,7 @@ import com.kvr.user.model.LoginReq
 import com.kvr.user.model.Otp
 import com.kvr.user.model.OtpReq
 import com.kvr.user.network.Response
+import com.kvr.user.view.BackHandler
 
 @Composable
 fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {}) {
@@ -49,6 +50,7 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
     val authVM = viewModel<AuthVM>()
     val state = authVM.state.collectAsState().value
     val username = remember { mutableStateOf("") }
+    val whatsappNumber = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
     val showVisualPass = remember { mutableStateOf<VisualTransformation>(PasswordVisualTransformation()) }
     val otpState = authVM._otpState.collectAsState().value
@@ -80,7 +82,7 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
     }
 
     fun login(){
-        if (username.value.isEmpty()) {
+        if (username.value.isEmpty() && whatsappNumber.value.isEmpty()) {
             Helpers.showToast(context, 1, context.getString(R.string.sign_username_error))
         }
 //        else if(username.value.contains('@') && !Patterns.EMAIL_ADDRESS.matcher(username.value).matches()){
@@ -99,7 +101,7 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                 "Failed to match OTP Number"
             )
         } else {
-            val loginReq = LoginReq(mobile_number = username.value, otp = password.value)
+            val loginReq = LoginReq(mobile_number = username.value, whatsapp_number = whatsappNumber.value, otp = password.value)
             if(isOtpView.value){
                 authVM.loginApiCall(loginReq)
             }else{
@@ -149,62 +151,27 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                 .align(Alignment.CenterHorizontally)
         )
         Spacer(modifier = Modifier.height(30.dp))
-        Text(
-            text = stringResource(R.string.sign_in_heading),
-            style = TextStyle(
-                color = TextColor,
-                fontSize = 16.sp
-            ),
-            fontFamily = FontFamily(fonts = MontserratRegular),
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
-        Text(
-            text = stringResource(R.string.sign_in_heading1),
-            style = TextStyle(
-                color = TextColor,
-                fontSize = 16.sp
-            ),
-            fontFamily = FontFamily(fonts = MontserratRegular),
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
-        Spacer(modifier = Modifier.height(30.dp))
-        Text(
-            text = stringResource(R.string.sinin_placholder_email),
-            style = TextStyle(
-                color = TextColor,
-                fontSize = 14.sp
-            ),
-            fontFamily = FontFamily(fonts = MontserratRegular)
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        TextField(
-            modifier = Modifier
-                .clip(shape = RoundedCornerShape(8.dp))
-                .background(color = Color(0xFFf3f3f3))
-                .fillMaxWidth(),
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color(0xFFf3f3f3),
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                textColor = Color.Black
-            ),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            value = username.value,
-            onValueChange = {it ->
-                val phoneParse = it.filter { it.isDigit() }
-                if(phoneParse.length < 11){
-                    username.value =  phoneParse
-                }
-            },
-            textStyle = TextStyle(
-                color = BlackColor,
-                fontSize = 16.sp,
-                fontFamily = FontFamily(fonts = MontserratMedium),
-                textAlign = TextAlign.Start
-            )
-        )
-        Spacer(modifier = Modifier.height(10.dp))
+
         if(isOtpView.value){
+            Text(
+                text = stringResource(R.string.otp_heading),
+                style = TextStyle(
+                    color = TextColor,
+                    fontSize = 16.sp
+                ),
+                fontFamily = FontFamily(fonts = MontserratRegular),
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+            Text(
+                text = stringResource(R.string.otp_heading1),
+                style = TextStyle(
+                    color = TextColor,
+                    fontSize = 16.sp
+                ),
+                fontFamily = FontFamily(fonts = MontserratRegular),
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+            Spacer(modifier = Modifier.height(30.dp))
             Text(
                 text = stringResource(R.string.otp_number),
                 style = TextStyle(
@@ -282,13 +249,13 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                                 ),
 
                                 ) {
-                                append(stringResource(R.string.resend_otp))
+                                append(" "+stringResource(R.string.resend_otp))
                             }
                         },
                         modifier = Modifier
                             .align(alignment = Alignment.CenterVertically)
                             .clickable {
-                                val loginReq = LoginReq(mobile_number = username.value, otp = password.value)
+                                val loginReq = LoginReq(mobile_number = username.value, whatsapp_number = whatsappNumber.value, otp = password.value)
                                 authVM.loginOtpCall(loginReq)
                             },
                         style = TextStyle(
@@ -301,6 +268,97 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                     .align(alignment = Alignment.CenterVertically)){
                 }
             }
+        }else{
+            Text(
+                text = stringResource(R.string.sign_in_heading),
+                style = TextStyle(
+                    color = TextColor,
+                    fontSize = 16.sp
+                ),
+                fontFamily = FontFamily(fonts = MontserratRegular),
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+            Text(
+                text = stringResource(R.string.sign_in_heading1),
+                style = TextStyle(
+                    color = TextColor,
+                    fontSize = 16.sp
+                ),
+                fontFamily = FontFamily(fonts = MontserratRegular),
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+            Spacer(modifier = Modifier.height(30.dp))
+            Text(
+                text = stringResource(R.string.sinin_placholder_email),
+                style = TextStyle(
+                    color = TextColor,
+                    fontSize = 14.sp
+                ),
+                fontFamily = FontFamily(fonts = MontserratRegular)
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            TextField(
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(8.dp))
+                    .background(color = Color(0xFFf3f3f3))
+                    .fillMaxWidth(),
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = Color(0xFFf3f3f3),
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    textColor = Color.Black
+                ),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                value = username.value,
+                onValueChange = {it ->
+                    val phoneParse = it.filter { it.isDigit() }
+                    if(phoneParse.length < 11){
+                        username.value =  phoneParse
+                    }
+                },
+                textStyle = TextStyle(
+                    color = BlackColor,
+                    fontSize = 16.sp,
+                    fontFamily = FontFamily(fonts = MontserratMedium),
+                    textAlign = TextAlign.Start
+                )
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = stringResource(R.string.sinin_placholder_password),
+                style = TextStyle(
+                    color = TextColor,
+                    fontSize = 14.sp
+                ),
+                fontFamily = FontFamily(fonts = MontserratRegular)
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            TextField(
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(8.dp))
+                    .background(color = Color(0xFFf3f3f3))
+                    .fillMaxWidth(),
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = Color(0xFFf3f3f3),
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    textColor = Color.Black
+                ),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                value = whatsappNumber.value,
+                onValueChange = {it ->
+                    val phoneParse = it.filter { it.isDigit() }
+                    if(phoneParse.length < 11){
+                        whatsappNumber.value =  phoneParse
+                    }
+                },
+                textStyle = TextStyle(
+                    color = BlackColor,
+                    fontSize = 16.sp,
+                    fontFamily = FontFamily(fonts = MontserratMedium),
+                    textAlign = TextAlign.Start
+                )
+            )
         }
         Spacer(modifier = Modifier.height(30.dp))
         Button(
@@ -312,7 +370,7 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                 .clip(shape = RoundedCornerShape(8.dp)),
         ) {
             Text(
-                text = stringResource(R.string.login),
+                text = if(isOtpView.value) stringResource(R.string.submit) else  stringResource(R.string.login),
                 style = TextStyle(
                     color = WhiteColor,
                     fontSize = 16.sp
@@ -320,126 +378,131 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                 fontFamily = FontFamily(fonts = MontserratRegular),
             )
         }
+//        Spacer(modifier = Modifier.height(16.dp))
+//        Text(
+//            buildAnnotatedString {
+//                withStyle(
+//                    style = SpanStyle(
+//                        color = PrimaryColor,
+//                        fontSize = 14.sp,
+//                        fontFamily = FontFamily(fonts = MontserratRegular),
+//                    )
+//                ) {
+//                    append(stringResource(R.string.forgot_pass))
+//                }
+//            },
+//            style = TextStyle(
+//                textAlign = TextAlign.Start
+//            ),
+//            modifier = Modifier
+//                .align(alignment = Alignment.End)
+//                .padding(end = 4.dp)
+//                .clickable {
+//                    navController.navigate(Screen.ForgotPass.route)
+//                }
+//        )
         Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            buildAnnotatedString {
-                withStyle(
-                    style = SpanStyle(
-                        color = PrimaryColor,
-                        fontSize = 14.sp,
-                        fontFamily = FontFamily(fonts = MontserratRegular),
-                    )
-                ) {
-                    append(stringResource(R.string.forgot_pass))
-                }
-            },
-            style = TextStyle(
-                textAlign = TextAlign.Start
-            ),
-            modifier = Modifier
-                .align(alignment = Alignment.End)
-                .padding(end = 4.dp)
-                .clickable {
-                    navController.navigate(Screen.ForgotPass.route)
-                }
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Row{
-            Box(modifier = Modifier
-                .weight(1.5f)
-                .align(alignment = Alignment.CenterVertically)){
-                Divider(color = Color(0xFFE0DFDF), thickness = 0.8.dp)
-            }
-            Box(modifier = Modifier.weight(0.5f), contentAlignment = Alignment.Center){
-                Text(
-                    text = stringResource(R.string.or),
-                    style = TextStyle(
-                        color = HeadingColor,
-                        fontSize = 15.sp
-                    ),
-                    fontFamily = FontFamily(fonts = MontserratRegular),
-                    textAlign = TextAlign.Start,
-                )
-            }
-            Box(modifier = Modifier
-                .weight(1.5f)
-                .align(alignment = Alignment.CenterVertically)){
-                Divider(color = Color(0xFFE0DFDF), thickness = 0.8.dp)
-            }
-        }
-        Spacer(modifier = Modifier.height(24.dp))
-        OutLinedBtn(modifier = Modifier
-            .fillMaxWidth()
-            .align(alignment = Alignment.CenterHorizontally),icon = R.drawable.profile,btnText = stringResource(
-                        R.string.login_customer), click = {
-            login()
-        })
-        OutLinedBtn(modifier = Modifier
-            .fillMaxWidth()
-            .align(alignment = Alignment.CenterHorizontally),icon = R.drawable.distributor,btnText = stringResource(
-                        R.string.login_distributor), click = {
-            login()
-        })
-        OutLinedBtn(modifier = Modifier
-            .fillMaxWidth()
-            .align(alignment = Alignment.CenterHorizontally),icon = R.drawable.wholesale,btnText = stringResource(
-                        R.string.login_wholesaler), click = {
-            login()
-        })
-        Spacer(modifier = Modifier.height(20.dp))
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center){
-            Box(modifier = Modifier
-                .weight(0.1f)
-                .align(alignment = Alignment.CenterVertically)){
-            }
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center, modifier = Modifier.weight(3.0f)){
-                Text(
-                    buildAnnotatedString {
-                        withStyle(
-                            style = SpanStyle(
-                                color = TextColor,
-                                fontSize = 14.sp,
-                                fontFamily = FontFamily(fonts = MontserratRegular),
-                            )
-                        ) {
-                            append(stringResource(R.string.no_account))
-                        }
-                    },
-                    style = TextStyle(
-                        textAlign = TextAlign.Start
-                    ),
-                    modifier = Modifier.align(alignment = Alignment.CenterVertically)
-                )
-                Text(
-                    buildAnnotatedString {
-                        withStyle(
-                            style = SpanStyle(
-                                color = PrimaryColor,
-                                fontSize = 14.sp,
-                                fontFamily = FontFamily(fonts = MontserratBold)
-                            ),
-
-                            ) {
-                            append(stringResource(R.string.sign_up))
-                        }
-                    },
-                    modifier = Modifier
-                        .align(alignment = Alignment.CenterVertically)
-                        .clickable {
-                            navController.navigate(Screen.Signup.route)
-                        },
-                    style = TextStyle(
-                        textAlign = TextAlign.Start
-                    )
-                )
-            }
-            Box(modifier = Modifier
-                .weight(0.1f)
-                .align(alignment = Alignment.CenterVertically)){
-            }
-        }
+//        Row{
+//            Box(modifier = Modifier
+//                .weight(1.5f)
+//                .align(alignment = Alignment.CenterVertically)){
+//                Divider(color = Color(0xFFE0DFDF), thickness = 0.8.dp)
+//            }
+//            Box(modifier = Modifier.weight(0.5f), contentAlignment = Alignment.Center){
+//                Text(
+//                    text = stringResource(R.string.or),
+//                    style = TextStyle(
+//                        color = HeadingColor,
+//                        fontSize = 15.sp
+//                    ),
+//                    fontFamily = FontFamily(fonts = MontserratRegular),
+//                    textAlign = TextAlign.Start,
+//                )
+//            }
+//            Box(modifier = Modifier
+//                .weight(1.5f)
+//                .align(alignment = Alignment.CenterVertically)){
+//                Divider(color = Color(0xFFE0DFDF), thickness = 0.8.dp)
+//            }
+//        }
+//        Spacer(modifier = Modifier.height(24.dp))
+//        OutLinedBtn(modifier = Modifier
+//            .fillMaxWidth()
+//            .align(alignment = Alignment.CenterHorizontally),icon = R.drawable.profile,btnText = stringResource(
+//                        R.string.login_customer), click = {
+//            login()
+//        })
+//        OutLinedBtn(modifier = Modifier
+//            .fillMaxWidth()
+//            .align(alignment = Alignment.CenterHorizontally),icon = R.drawable.distributor,btnText = stringResource(
+//                        R.string.login_distributor), click = {
+//            login()
+//        })
+//        OutLinedBtn(modifier = Modifier
+//            .fillMaxWidth()
+//            .align(alignment = Alignment.CenterHorizontally),icon = R.drawable.wholesale,btnText = stringResource(
+//                        R.string.login_wholesaler), click = {
+//            login()
+//        })
+//        Spacer(modifier = Modifier.height(20.dp))
+//        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center){
+//            Box(modifier = Modifier
+//                .weight(0.1f)
+//                .align(alignment = Alignment.CenterVertically)){
+//            }
+//            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center, modifier = Modifier.weight(3.0f)){
+//                Text(
+//                    buildAnnotatedString {
+//                        withStyle(
+//                            style = SpanStyle(
+//                                color = TextColor,
+//                                fontSize = 14.sp,
+//                                fontFamily = FontFamily(fonts = MontserratRegular),
+//                            )
+//                        ) {
+//                            append(stringResource(R.string.no_account))
+//                        }
+//                    },
+//                    style = TextStyle(
+//                        textAlign = TextAlign.Start
+//                    ),
+//                    modifier = Modifier.align(alignment = Alignment.CenterVertically)
+//                )
+//                Text(
+//                    buildAnnotatedString {
+//                        withStyle(
+//                            style = SpanStyle(
+//                                color = PrimaryColor,
+//                                fontSize = 14.sp,
+//                                fontFamily = FontFamily(fonts = MontserratBold)
+//                            ),
+//
+//                            ) {
+//                            append(" "+stringResource(R.string.sign_up))
+//                        }
+//                    },
+//                    modifier = Modifier
+//                        .align(alignment = Alignment.CenterVertically)
+//                        .clickable {
+//                            navController.navigate(Screen.Signup.route)
+//                        },
+//                    style = TextStyle(
+//                        textAlign = TextAlign.Start
+//                    )
+//                )
+//            }
+//            Box(modifier = Modifier
+//                .weight(0.1f)
+//                .align(alignment = Alignment.CenterVertically)){
+//            }
+//        }
         Spacer(modifier = Modifier.height(40.dp))
+
+        BackHandler(enabled = isOtpView.value, onBack = {
+            isOtpView.value = false
+        })
     }
+
 }
 
 @Composable

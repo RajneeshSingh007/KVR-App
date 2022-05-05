@@ -19,8 +19,8 @@
     <string name="sign_in_heading">Please enter the details below</string>
     <string name="sign_in_heading1">to continue</string>
     <string name="sinin_placholder_email">Phone Number</string>
-    <string name="sinin_placholder_password">Password</string>
-    <string name="login">Login</string>
+    <string name="sinin_placholder_password">Whatsapp Number</string>
+    <string name="login">Get OTP</string>
     <string name="forgot_pass">Forgot Password?</string>
     <string name="or">OR</string>
     <string name="no_account">Don\'t have an account?</string>

@@ -15,12 +15,12 @@ import java.io.File
 object ApiServices {
 
     suspend fun loginOTPApi(loginReq: LoginReq) : Response<Otp> {
-        val body = listOf("mobile_number" to loginReq.mobile_number.toString())
+        val body = listOf("mobile_number" to loginReq.mobile_number.toString(),"whatsapp_number" to loginReq.whatsapp_number.toString(),"role_id" to loginReq.role_id.toString())
         return Network<Otp>(Otp::class.java,"/mobile-login", body).networkCall(false,0)
     }
 
     suspend fun loginApi(loginReq: LoginReq) : Response<Login> {
-        val body = listOf("mobile_number" to loginReq.mobile_number.toString(), "otp" to loginReq.otp.toString(),"device_token" to loginReq.device_token.toString())
+        val body = listOf("mobile_number" to loginReq.mobile_number.toString(), "otp" to loginReq.otp.toString(),"device_token" to loginReq.device_token.toString(),"whatsapp_number" to loginReq.whatsapp_number.toString(),"role_id" to loginReq.role_id.toString())
         return Network<Login>(Login::class.java,"/verify-mobile-login", body).networkCall(false,0)
     }
 

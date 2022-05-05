@@ -18,8 +18,8 @@
     <string name="sign_in_heading">దయచేసి దిగువన వివరాలను నమోదు చేయండి</string>
     <string name="sign_in_heading1">కొనసాగించడానికి</string>
     <string name="sinin_placholder_email">ఫోన్ నంబర్</string>
-    <string name="sinin_placholder_password">పాస్‌వర్డ్</string>
-    <string name="login">లాగిన్</string>
+    <string name="sinin_placholder_password">పWhatsapp నంబర్</string>
+    <string name="login">OTP పొందండి</string>
     <string name="forgot_pass">పాస్‌వర్డ్ మర్చిపోయారా?</string>
     <string name="or">OR</string>
     <string name="no_account">ఖాతా లేదా?</string>

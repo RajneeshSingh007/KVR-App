@@ -101,11 +101,12 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                     }
                 }
                 loader(false)
-                navController.navigate(Screen.HomeScreen.route){
-                    popUpTo(Screen.SignIn.route){
-                        inclusive = true
-                    }
-                }
+//                navController.navigate(Screen.HomeScreen.route){
+//                    popUpTo(Screen.SignIn.route){
+//                        inclusive = true
+//                    }
+//                }
+                navController.navigate(Screen.SignIn.route)
             }
             else -> {
             }
@@ -159,67 +160,67 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
             Spacer(modifier = Modifier.height(30.dp))
-            Text(
-                text = stringResource(R.string.name),
-                style = TextStyle(
-                    color = TextColor,
-                    fontSize = 14.sp
-                ),
-                fontFamily = FontFamily(fonts = MontserratRegular)
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            TextField(
-                modifier = Modifier
-                    .clip(shape = RoundedCornerShape(8.dp))
-                    .background(color = Color(0xFFf3f3f3))
-                    .fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = Color(0xFFf3f3f3),
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    textColor = Color.Black
-                ),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                value = name.value,
-                onValueChange = { name.value = it.filter { it.isLetter() || it.isWhitespace() } },
-                textStyle = TextStyle(
-                    color = BlackColor,
-                    fontSize = 16.sp,
-                    fontFamily = FontFamily(fonts = MontserratMedium),
-                    textAlign = TextAlign.Start
-                )
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(
-                text = stringResource(R.string.last_name),
-                style = TextStyle(
-                    color = TextColor,
-                    fontSize = 14.sp
-                ),
-                fontFamily = FontFamily(fonts = MontserratRegular)
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            TextField(
-                modifier = Modifier
-                    .clip(shape = RoundedCornerShape(8.dp))
-                    .background(color = Color(0xFFf3f3f3))
-                    .fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = Color(0xFFf3f3f3),
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    textColor = Color.Black
-                ),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                value = lastName.value,
-                onValueChange = { lastName.value = it.filter { it.isLetter() || it.isWhitespace()} },
-                textStyle = TextStyle(
-                    color = BlackColor,
-                    fontSize = 16.sp,
-                    fontFamily = FontFamily(fonts = MontserratMedium),
-                    textAlign = TextAlign.Start
-                ),
-            )
+//            Text(
+//                text = stringResource(R.string.name),
+//                style = TextStyle(
+//                    color = TextColor,
+//                    fontSize = 14.sp
+//                ),
+//                fontFamily = FontFamily(fonts = MontserratRegular)
+//            )
+//            Spacer(modifier = Modifier.height(10.dp))
+//            TextField(
+//                modifier = Modifier
+//                    .clip(shape = RoundedCornerShape(8.dp))
+//                    .background(color = Color(0xFFf3f3f3))
+//                    .fillMaxWidth(),
+//                colors = TextFieldDefaults.textFieldColors(
+//                    backgroundColor = Color(0xFFf3f3f3),
+//                    focusedIndicatorColor = Color.Transparent,
+//                    unfocusedIndicatorColor = Color.Transparent,
+//                    textColor = Color.Black
+//                ),
+//                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+//                value = name.value,
+//                onValueChange = { name.value = it.filter { it.isLetter() || it.isWhitespace() } },
+//                textStyle = TextStyle(
+//                    color = BlackColor,
+//                    fontSize = 16.sp,
+//                    fontFamily = FontFamily(fonts = MontserratMedium),
+//                    textAlign = TextAlign.Start
+//                )
+//            )
+//            Spacer(modifier = Modifier.height(10.dp))
+//            Text(
+//                text = stringResource(R.string.last_name),
+//                style = TextStyle(
+//                    color = TextColor,
+//                    fontSize = 14.sp
+//                ),
+//                fontFamily = FontFamily(fonts = MontserratRegular)
+//            )
+//            Spacer(modifier = Modifier.height(10.dp))
+//            TextField(
+//                modifier = Modifier
+//                    .clip(shape = RoundedCornerShape(8.dp))
+//                    .background(color = Color(0xFFf3f3f3))
+//                    .fillMaxWidth(),
+//                colors = TextFieldDefaults.textFieldColors(
+//                    backgroundColor = Color(0xFFf3f3f3),
+//                    focusedIndicatorColor = Color.Transparent,
+//                    unfocusedIndicatorColor = Color.Transparent,
+//                    textColor = Color.Black
+//                ),
+//                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+//                value = lastName.value,
+//                onValueChange = { lastName.value = it.filter { it.isLetter() || it.isWhitespace()} },
+//                textStyle = TextStyle(
+//                    color = BlackColor,
+//                    fontSize = 16.sp,
+//                    fontFamily = FontFamily(fonts = MontserratMedium),
+//                    textAlign = TextAlign.Start
+//                ),
+//            )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = stringResource(R.string.phone_number),
@@ -257,157 +258,160 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                 ),
             )
             Spacer(modifier = Modifier.height(10.dp))
-            Text(
-                text = stringResource(R.string.email),
-                style = TextStyle(
-                    color = TextColor,
-                    fontSize = 14.sp
-                ),
-                fontFamily = FontFamily(fonts = MontserratRegular)
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            TextField(
-                modifier = Modifier
-                    .clip(shape = RoundedCornerShape(8.dp))
-                    .background(color = Color(0xFFf3f3f3))
-                    .fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = Color(0xFFf3f3f3),
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    textColor = Color.Black
-                ),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                value = email.value,
-                onValueChange = { email.value = it },
-                textStyle = TextStyle(
-                    color = BlackColor,
-                    fontSize = 16.sp,
-                    fontFamily = FontFamily(fonts = MontserratMedium),
-                    textAlign = TextAlign.Start
-                )
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = stringResource(R.string.password),
-                style = TextStyle(
-                    color = TextColor,
-                    fontSize = 14.sp
-                ),
-                fontFamily = FontFamily(fonts = MontserratRegular)
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            TextField(
-                modifier = Modifier
-                    .clip(shape = RoundedCornerShape(8.dp))
-                    .background(color = Color(0xFFf3f3f3))
-                    .fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = Color(0xFFf3f3f3),
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    textColor = Color.Black
-                ),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                value = password.value,
-                onValueChange = { password.value = it },
-                textStyle = TextStyle(
-                    color = BlackColor,
-                    fontSize = 16.sp,
-                    fontFamily = FontFamily(fonts = MontserratMedium),
-                    textAlign = TextAlign.Start
-                ),
-                visualTransformation = showVisualPass.value,
-                trailingIcon={
-                    IconButton(onClick = {
-                        showVisualPass.value = if (showVisualPass.value == PasswordVisualTransformation()) VisualTransformation.None else PasswordVisualTransformation()
-                    }) {
-                        FaIcon(faIcon = if(showVisualPass.value == VisualTransformation.None) FaIcons.EyeSlashRegular else FaIcons.EyeRegular, size = 20.dp, tint = TextColor)
-                    }
-                }
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = stringResource(R.string.confirm_password),
-                style = TextStyle(
-                    color = TextColor,
-                    fontSize = 14.sp
-                ),
-                fontFamily = FontFamily(fonts = MontserratRegular)
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            TextField(
-                modifier = Modifier
-                    .clip(shape = RoundedCornerShape(8.dp))
-                    .background(color = Color(0xFFf3f3f3))
-                    .fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = Color(0xFFf3f3f3),
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    textColor = Color.Black
-                ),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                value = confirmPassword.value,
-                onValueChange = { confirmPassword.value = it },
-                textStyle = TextStyle(
-                    color = BlackColor,
-                    fontSize = 16.sp,
-                    fontFamily = FontFamily(fonts = MontserratMedium),
-                    textAlign = TextAlign.Start
-                ),
-                visualTransformation = showVisualCPass.value,
-                trailingIcon={
-                    IconButton(onClick = {
-                        showVisualCPass.value = if (showVisualCPass.value == PasswordVisualTransformation()) VisualTransformation.None else PasswordVisualTransformation()
-                    }) {
-                        FaIcon(faIcon = if(showVisualCPass.value == VisualTransformation.None) FaIcons.EyeSlashRegular else FaIcons.EyeRegular, size = 20.dp, tint = TextColor)
-                    }
-                }
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = stringResource(R.string.select_role),
-                style = TextStyle(
-                    color = TextColor,
-                    fontSize = 14.sp
-                ),
-                fontFamily = FontFamily(fonts = MontserratRegular)
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            com.kvr.user.widget.DropdownMenu(items = userRoleList, placeholder = ""){ i, it -> role.value = i+1}
+//            Text(
+//                text = stringResource(R.string.email),
+//                style = TextStyle(
+//                    color = TextColor,
+//                    fontSize = 14.sp
+//                ),
+//                fontFamily = FontFamily(fonts = MontserratRegular)
+//            )
+//            Spacer(modifier = Modifier.height(10.dp))
+//            TextField(
+//                modifier = Modifier
+//                    .clip(shape = RoundedCornerShape(8.dp))
+//                    .background(color = Color(0xFFf3f3f3))
+//                    .fillMaxWidth(),
+//                colors = TextFieldDefaults.textFieldColors(
+//                    backgroundColor = Color(0xFFf3f3f3),
+//                    focusedIndicatorColor = Color.Transparent,
+//                    unfocusedIndicatorColor = Color.Transparent,
+//                    textColor = Color.Black
+//                ),
+//                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+//                value = email.value,
+//                onValueChange = { email.value = it },
+//                textStyle = TextStyle(
+//                    color = BlackColor,
+//                    fontSize = 16.sp,
+//                    fontFamily = FontFamily(fonts = MontserratMedium),
+//                    textAlign = TextAlign.Start
+//                )
+//            )
+//            Spacer(modifier = Modifier.height(16.dp))
+//            Text(
+//                text = stringResource(R.string.password),
+//                style = TextStyle(
+//                    color = TextColor,
+//                    fontSize = 14.sp
+//                ),
+//                fontFamily = FontFamily(fonts = MontserratRegular)
+//            )
+//            Spacer(modifier = Modifier.height(10.dp))
+//            TextField(
+//                modifier = Modifier
+//                    .clip(shape = RoundedCornerShape(8.dp))
+//                    .background(color = Color(0xFFf3f3f3))
+//                    .fillMaxWidth(),
+//                colors = TextFieldDefaults.textFieldColors(
+//                    backgroundColor = Color(0xFFf3f3f3),
+//                    focusedIndicatorColor = Color.Transparent,
+//                    unfocusedIndicatorColor = Color.Transparent,
+//                    textColor = Color.Black
+//                ),
+//                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+//                value = password.value,
+//                onValueChange = { password.value = it },
+//                textStyle = TextStyle(
+//                    color = BlackColor,
+//                    fontSize = 16.sp,
+//                    fontFamily = FontFamily(fonts = MontserratMedium),
+//                    textAlign = TextAlign.Start
+//                ),
+//                visualTransformation = showVisualPass.value,
+//                trailingIcon={
+//                    IconButton(onClick = {
+//                        showVisualPass.value = if (showVisualPass.value == PasswordVisualTransformation()) VisualTransformation.None else PasswordVisualTransformation()
+//                    }) {
+//                        FaIcon(faIcon = if(showVisualPass.value == VisualTransformation.None) FaIcons.EyeSlashRegular else FaIcons.EyeRegular, size = 20.dp, tint = TextColor)
+//                    }
+//                }
+//            )
+//            Spacer(modifier = Modifier.height(16.dp))
+//            Text(
+//                text = stringResource(R.string.confirm_password),
+//                style = TextStyle(
+//                    color = TextColor,
+//                    fontSize = 14.sp
+//                ),
+//                fontFamily = FontFamily(fonts = MontserratRegular)
+//            )
+//            Spacer(modifier = Modifier.height(10.dp))
+//            TextField(
+//                modifier = Modifier
+//                    .clip(shape = RoundedCornerShape(8.dp))
+//                    .background(color = Color(0xFFf3f3f3))
+//                    .fillMaxWidth(),
+//                colors = TextFieldDefaults.textFieldColors(
+//                    backgroundColor = Color(0xFFf3f3f3),
+//                    focusedIndicatorColor = Color.Transparent,
+//                    unfocusedIndicatorColor = Color.Transparent,
+//                    textColor = Color.Black
+//                ),
+//                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+//                value = confirmPassword.value,
+//                onValueChange = { confirmPassword.value = it },
+//                textStyle = TextStyle(
+//                    color = BlackColor,
+//                    fontSize = 16.sp,
+//                    fontFamily = FontFamily(fonts = MontserratMedium),
+//                    textAlign = TextAlign.Start
+//                ),
+//                visualTransformation = showVisualCPass.value,
+//                trailingIcon={
+//                    IconButton(onClick = {
+//                        showVisualCPass.value = if (showVisualCPass.value == PasswordVisualTransformation()) VisualTransformation.None else PasswordVisualTransformation()
+//                    }) {
+//                        FaIcon(faIcon = if(showVisualCPass.value == VisualTransformation.None) FaIcons.EyeSlashRegular else FaIcons.EyeRegular, size = 20.dp, tint = TextColor)
+//                    }
+//                }
+//            )
+//            Spacer(modifier = Modifier.height(16.dp))
+//            Text(
+//                text = stringResource(R.string.select_role),
+//                style = TextStyle(
+//                    color = TextColor,
+//                    fontSize = 14.sp
+//                ),
+//                fontFamily = FontFamily(fonts = MontserratRegular)
+//            )
+//            Spacer(modifier = Modifier.height(10.dp))
+//            com.kvr.user.widget.DropdownMenu(items = userRoleList, placeholder = ""){ i, it -> role.value = i+1}
             Spacer(modifier = Modifier.height(30.dp))
             Button(
                 onClick = {
-                    if (name.value.isEmpty()) {
-                        Helpers.showToast(context, 1, "Please, Enter First Name")
-                    }else if (lastName.value.isEmpty()) {
-                        Helpers.showToast(context, 1, "Please, Enter Last Name")
-                    }else if (phone.value.isEmpty()) {
+//                    if (name.value.isEmpty()) {
+//                        Helpers.showToast(context, 1, "Please, Enter First Name")
+//                    }else if (lastName.value.isEmpty()) {
+//                        Helpers.showToast(context, 1, "Please, Enter Last Name")
+//                    }else
+                    if (phone.value.isEmpty()) {
                         Helpers.showToast(context, 1, "Please, Enter Phone Number")
                     }else if (phone.value.length < 10) {
                         Helpers.showToast(context, 1, "Please, Enter Valid Phone Number")
-                    }else if(email.value.isNotEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email.value).matches()){
-                        Helpers.showToast(context,1 , "Please, Enter Valid Email")
-                    }else if (password.value == "") {
-                        Helpers.showToast(
-                            context,
-                            1,
-                            "Please, Enter Password"
-                        )
-                    }else if (confirmPassword.value == "") {
-                        Helpers.showToast(
-                            context,
-                            1,
-                            "Please, Enter Confirm Password"
-                        )
-                    } else if (password.value != confirmPassword.value) {
-                        Helpers.showToast(
-                            context,
-                            1,
-                            "Failed to match password"
-                        )
-                    }  else {
+                    }
+//                    else if(email.value.isNotEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email.value).matches()){
+//                        Helpers.showToast(context,1 , "Please, Enter Valid Email")
+//                    }else if (password.value == "") {
+//                        Helpers.showToast(
+//                            context,
+//                            1,
+//                            "Please, Enter Password"
+//                        )
+//                    }else if (confirmPassword.value == "") {
+//                        Helpers.showToast(
+//                            context,
+//                            1,
+//                            "Please, Enter Confirm Password"
+//                        )
+//                    } else if (password.value != confirmPassword.value) {
+//                        Helpers.showToast(
+//                            context,
+//                            1,
+//                            "Failed to match password"
+//                        )
+//                    }
+                    else {
                         authVM.registerApiCall(RegisterReq(role_id = role.value, phone=phone.value, first_name = name.value, last_name = lastName.value, password = password.value, c_password = confirmPassword.value, email = email.value))
                     }
                 }, modifier = Modifier
@@ -458,7 +462,7 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                                 ),
 
                                 ) {
-                                append(stringResource(R.string.login_space))
+                                append(" "+stringResource(R.string.login_space))
                             }
                         },
                         modifier = Modifier
@@ -616,9 +620,10 @@ fun Signup(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
             }
         }
         Spacer(modifier = Modifier.height(40.dp))
+
+        BackHandler(enabled = isOtpView.value, onBack = {
+            isOtpView.value = true
+        })
     }
 
-    BackHandler(enabled = isOtpView.value, onBack = {
-        isOtpView.value = true
-    })
 }
