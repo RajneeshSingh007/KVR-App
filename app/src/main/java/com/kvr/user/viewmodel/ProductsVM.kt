@@ -41,6 +41,7 @@ class ProductsVM : ViewModel() {
             e.message?.let { _state.value =  Response.Error(it) }
             delay(16)
             _state.value = Response.Loading(false)
+            e.printStackTrace()
         }finally {
             delay(16)
             _state.value = Response.Loading(false)

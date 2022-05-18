@@ -187,10 +187,10 @@ fun HomeScreen(navController: NavHostController,drawerClick: ()-> Unit = {}) {
 
         Spacer(modifier = Modifier.padding(vertical = 16.dp))
 
-        HorizontalPager(count = bannerList.size,state = bannerStatePager,contentPadding = PaddingValues(horizontal = 32.dp),
-            modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) { page ->
-            bannerList.forEach { it ->
-                Banners(it)
+        HorizontalPager( count = bannerList.size,state = bannerStatePager,contentPadding = PaddingValues(horizontal = 32.dp),
+            modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            bannerList.forEach { j ->
+                Banners(j)
             }
         }
 
@@ -430,6 +430,15 @@ fun Products(list: List<ProductsData>,itemClick: (p:ProductsData)-> Unit = {}){
                     ),
                     fontFamily = FontFamily(fonts = MontserratMedium),
                     maxLines = 1
+                )
+                Text(
+                    text = "₹${it.previous_price.toString()}",
+                    style = TextStyle(
+                        color = PrimaryColor,
+                        fontSize = 14.sp,
+                        textAlign = TextAlign.Center
+                    ),
+                    fontFamily = FontFamily(fonts = MontserratMedium),
                 )
                 Spacer(modifier = Modifier.padding(vertical = 6.dp))
             }

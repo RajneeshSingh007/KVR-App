@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">KVR</string>
-    <string name="razorpay_keyid" translatable="false">rzp_test_1M51iw7oo5a1nk</string>
+    <string name="razorpay_keyid" translatable="false">rzp_live_WCx1Qv4K86UyBY</string>
+<!--    <string name="razorpay_keyid" translatable="false">rzp_test_1M51iw7oo5a1nk</string>-->
     <string name="support">Support: +911234567890</string>
     <string name="my_addresses">My Addresses</string>
     <string name="search_by_vehicles">Search by Vehicle</string>

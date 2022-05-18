@@ -1,9 +1,9 @@
 package com.kvr.user.utils
 
 
-import android.util.Log
 import com.google.gson.*
 import java.lang.reflect.Type
+
 
 class StringConverter : JsonSerializer<String?>,
     JsonDeserializer<String?> {

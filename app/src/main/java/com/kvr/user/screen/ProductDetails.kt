@@ -163,7 +163,7 @@ fun ProductDetails(navController: NavHostController, name:String ="", id:Int=-1,
                     )
                     Spacer(modifier = Modifier.padding(vertical = 6.dp))
                     Text(
-                        text = "₹${productsDetails.value.data?.previous_price}",
+                        text = "₹${productsDetails.value.data?.price}",
                         style = TextStyle(
                             color = BlackColor,
                             fontSize = 16.sp,
@@ -327,7 +327,7 @@ fun ProductDetails(navController: NavHostController, name:String ="", id:Int=-1,
                             amount = productsDetails.value.data?.previous_price.toString(),
                             discount = productsDetails.value.data?.discount_price.toString(),
                             qty = "1",
-                            total = productsDetails.value.data?.previous_price.toString()))
+                            total = productsDetails.value.data?.price.toString()))
                     }, modifier = Modifier
                         .fillMaxWidth()
                         .height(50.dp),

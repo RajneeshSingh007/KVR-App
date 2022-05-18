@@ -43,6 +43,7 @@ fun Navigation(navHostController: NavHostController, drawerClick: ()-> Unit = {}
             ForgotSuccess(navController= navHostController)
         }
         composable(route = Screen.HomeScreen.route){
+            loader(false)
             resetScroll()
             HomeScreen(navController = navHostController){
                 drawerClick()

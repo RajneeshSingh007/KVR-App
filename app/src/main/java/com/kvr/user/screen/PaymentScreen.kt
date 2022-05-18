@@ -162,53 +162,54 @@ fun PaymentScreen(navController: NavHostController,total:String? = "", loader: (
     }
 
     fun processPaymentGateway(profileData: ProfileData, method:String=""){
-        try {
-            val options = JSONObject()
-            options.put("name", context.getString(R.string.app_name))
-            options.put("description", "Checkout")
-            options.put("theme.color", "#3d4843");
-            options.put("currency", "INR")
-            //options.put("order_id", createOrderData.value.id);
-            if (total != null) {
+        if(total != null && total.toDouble() > 0) {
+            try {
+                val options = JSONObject()
+                options.put("name", context.getString(R.string.app_name))
+                options.put("description", "Checkout")
+                options.put("theme.color", "#3d4843");
+                options.put("currency", "INR")
+                //options.put("order_id", createOrderData.value.id);
                 options.put("amount", total.toDouble().times(100).toString())
+                val retryObj = JSONObject()
+                retryObj.put("enabled", true)
+                retryObj.put("max_count", 4)
+                options.put("retry", retryObj);
+
+                val prefill = JSONObject()
+                prefill.put("email", "${profileData.email}")
+                prefill.put("contact", "${profileData.phone}")
+                if (method == "Paytm" || method == "Phone Pay" || method == "Google Pay") {
+                    prefill.put("method", "upi")
+                } else if (method == "Cards") {
+                    prefill.put("method", "card")
+                } else if (method == "Net Banking") {
+                    prefill.put("method", "netbanking")
+                } else if (method == "Net Banking") {
+                    prefill.put("Wallet", "wallet")
+                }
+                options.put("prefill", prefill)
+
+                val customer = JSONObject()
+                customer.put("name", "${profileData.first_name} ${profileData.last_name}")
+                customer.put("email", "${profileData.email}")
+                customer.put("contact", "${profileData.phone}")
+                options.put("customer", customer)
+
+                val readOnly = JSONObject()
+                readOnly.put("name", true)
+                readOnly.put("email", true)
+                readOnly.put("contact", true)
+                options.put("readonly", readOnly)
+
+                val checkout = Checkout()
+                //Log.e("options", "${options.toString(4)}")
+                checkout.open(context, options)
+            } catch (e: Exception) {
+                Helpers.showToast(context, 1, "${e.message.toString()}")
             }
-
-            val retryObj = JSONObject()
-            retryObj.put("enabled", true)
-            retryObj.put("max_count", 4)
-            options.put("retry", retryObj);
-
-            val prefill = JSONObject()
-            prefill.put("email", "${profileData.email}")
-            prefill.put("contact", "${profileData.phone}")
-            if(method == "Paytm" || method == "Phone Pay" || method == "Google Pay"){
-                prefill.put("method", "upi")
-            }else if(method == "Cards"){
-                prefill.put("method", "card")
-            }else if(method == "Net Banking"){
-                prefill.put("method", "netbanking")
-            }else if(method == "Net Banking"){
-                prefill.put("Wallet", "wallet")
-            }
-            options.put("prefill", prefill)
-
-            val customer = JSONObject()
-            customer.put("name", "${profileData.first_name} ${profileData.last_name}")
-            customer.put("email", "${profileData.email}")
-            customer.put("contact", "${profileData.phone}")
-            options.put("customer", customer)
-
-            val readOnly = JSONObject()
-            readOnly.put("name", true)
-            readOnly.put("email", true)
-            readOnly.put("contact", true)
-            options.put("readonly", readOnly)
-
-            val checkout = Checkout()
-            //Log.e("options", "${options.toString(4)}")
-            checkout.open(context, options)
-        } catch (e: Exception) {
-            Helpers.showToast(context, 1, "${e.message.toString()}")
+        }else{
+            Helpers.showToast(context, 1, "Cart total must be greater than zero")
         }
     }
 

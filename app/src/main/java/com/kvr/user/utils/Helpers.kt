@@ -112,7 +112,7 @@ object Helpers {
     }
 
     @OptIn(DelicateCoroutinesApi::class)
-    fun setLocale(context: Activity?, lang: String = "en", recreate: Boolean = true) {
+    fun setLocale(context: Activity?, lang: String = "te", recreate: Boolean = true) {
         if(context == null) return
         val langLag = Locale(lang)
         val res: Resources = context.getResources()

@@ -66,7 +66,7 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
             }
             val lang = appPref.getString(Constants.PREF_LANG)
             if(lang?.isNotEmpty() == true)  Helpers.setLocale(this@MainActivity, lang,false)
-            else Helpers.setLocale(this@MainActivity, "en",false)
+            else Helpers.setLocale(this@MainActivity, "te",false)
         }
     }
 

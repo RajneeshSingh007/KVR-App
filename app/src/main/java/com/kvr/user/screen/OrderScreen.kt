@@ -139,12 +139,12 @@ fun OrderScreen(navController: NavHostController, screenType:Int? = -1,loader: (
                         }
                         1 -> {
                             cartItemAt.qty = cartItemAt.qty.minus(1)
-                            cartItemAt.total = cartItemAt.total.minus(cartItemAt.amount)
+                            cartItemAt.total = cartItemAt.total.minus(cartItemAt.amount.minus(cartItemAt.discount))
                             cartsList[removeIndex.value] = cartItemAt
                         }
                         0 -> {
                             cartItemAt.qty = cartItemAt.qty.plus(1)
-                            cartItemAt.total = cartItemAt.total.plus(cartItemAt.amount)
+                            cartItemAt.total = cartItemAt.total.plus(cartItemAt.amount.minus(cartItemAt.discount))
                             cartsList[removeIndex.value] = cartItemAt
                         }
                     }
@@ -218,7 +218,7 @@ fun OrderScreen(navController: NavHostController, screenType:Int? = -1,loader: (
                         amount = it.amount.toString(),
                         discount = it.discount.toString(),
                         qty = it.qty.plus(1).toString(),
-                        total = it.total.plus(it.amount).toString())
+                        total = it.total.plus(it.amount.minus(it.discount)).toString())
                     )
                 }, minusClick = {
                     removeIndex.value = i
@@ -230,7 +230,7 @@ fun OrderScreen(navController: NavHostController, screenType:Int? = -1,loader: (
                                 amount = it.amount.toString(),
                                 discount = it.discount.toString(),
                                 qty = it.qty.minus(1).toString(),
-                                total = it.total.minus(it.amount).toString())
+                                total = it.total.minus(it.amount.minus(it.discount)).toString())
                         )
                     }else{
                         cartType.value = 2
