@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.github.kittinunf.fuel.core.FuelManager
 import com.guru.fontawesomecomposelib.FaIcon
 import com.guru.fontawesomecomposelib.FaIcons
 import com.kvr.user.R
@@ -123,6 +124,9 @@ fun SignIn(navController: NavHostController, loader: (show:Boolean)-> Unit = {})
                    if (it != null) {
                        Helpers.showToast(context, 0, it)
                    }
+               }
+               state.data?.let{
+                   FuelManager.instance.baseHeaders = mapOf("Authorization" to "Bearer ${it.data.token}")
                }
                navController.navigate(Screen.HomeScreen.route){
                    popUpTo(Screen.SignIn.route){

@@ -83,6 +83,7 @@ fun HomeScreen(navController: NavHostController,drawerClick: ()-> Unit = {}) {
     val brandList = remember { mutableStateListOf<Brandsdata>() }
 
     LaunchedEffect(key1 = "HomeScreen"){
+        delay(200)
         homeVM.fetchBrands()
         homeVM.fetchProductsType(1, "popular")
         homeVM.fetchProductsType(2, "flash_deal")
