@@ -236,7 +236,7 @@ fun RowScope.TableCell(
                     .fillMaxHeight()
                     .align(alignment = Alignment.Center)
                     .padding(8.dp),
-                maxLines = 1
+                //maxLines = 1
             )
         }
     }
@@ -275,7 +275,7 @@ fun CategoryList(itemList:List<Category>, showDialog: Boolean,btnClick: () -> Un
             DialogProperties(dismissOnBackPress = true, dismissOnClickOutside = true)
         ) {
             Box(
-                contentAlignment= Alignment.Center,
+                //contentAlignment= Alignment.Start,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(400.dp)
