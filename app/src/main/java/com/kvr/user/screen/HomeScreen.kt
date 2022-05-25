@@ -190,9 +190,11 @@ fun HomeScreen(navController: NavHostController,drawerClick: ()-> Unit = {}) {
 
         HorizontalPager( count = bannerList.size,state = bannerStatePager,contentPadding = PaddingValues(horizontal = 32.dp),
             modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            bannerList.forEach { j ->
-                Banners(j)
-            }
+                //bannerList.forEachIndexed { i, j ->
+                  //  if(i == bannerStatePager.currentPage) {
+                        Banners(bannerList[bannerStatePager.currentPage])
+                    //}
+                //}
         }
 
         HorizontalPagerIndicator(

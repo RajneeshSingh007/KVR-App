@@ -100,8 +100,8 @@ dependencies {
 
     implementation "com.google.accompanist:accompanist-flowlayout:0.20.0"
 
-    implementation "com.google.accompanist:accompanist-pager:0.24.2-alpha"
-    implementation "com.google.accompanist:accompanist-pager-indicators:0.24.2-alpha"
+    implementation "com.google.accompanist:accompanist-pager:0.23.0"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.23.0"
     implementation 'androidx.palette:palette-ktx:1.0.0'
     implementation 'com.razorpay:checkout:1.6.12'
 }
