@@ -78,7 +78,8 @@ data class ProductsData (
     val galleries: List<Galleries>,
     val category : Category,
     val attributes: List<Attributes>,
-    val discount_percentage: String = ""
+    val discount_percentage: String = "",
+    val din: Int = 0
 )
 
 data class Attributes (

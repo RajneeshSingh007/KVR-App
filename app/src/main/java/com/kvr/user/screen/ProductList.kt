@@ -173,7 +173,7 @@ fun ProductList(navController: NavHostController, name:String ="", id:Int=-1,sea
                             navController.navigate("${Screen.ProductDetails.route}/${it.name}/${it.id}")
                         }
                         .height(64.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
-                        TableCell(text = "${i +1 }", weight = .1f,borders =borders)
+                        TableCell(text = "${it.din}", weight = .1f,borders =borders)
                         TableCell(text = "${it.part_no}", weight = .1f,borders =borders)
                         TableCell(text = Helpers.removeNull(it.part_code), weight = .2f,borders =borders)
                         TableCell(text = Helpers.removeNull(it.name), weight = .4f,borders =borders)

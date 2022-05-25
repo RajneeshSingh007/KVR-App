@@ -83,7 +83,7 @@
     <string name="buy_now">Buy Now</string>
     <string name="payment_success">Payment Success</string>
     <string name="payment_success_heading1">Your payment of</string>
-    <string name="payment_success_heading2">\"was successfully completed. \"</string>
+    <string name="payment_success_heading2"> was successfully completed.</string>
     <string name="track_order_status">Track Order Status</string>
     <string name="b2home">Back to Home</string>
     <string name="payments">Payments</string>

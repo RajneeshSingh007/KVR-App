@@ -102,7 +102,7 @@ fun PaymentSuccess(navController: NavHostController, amount: String?="0.00") {
                     }
                 }, modifier = Modifier
                     .weight(0.45f)
-                    .height(40.dp),
+                    .height(IntrinsicSize.Max),
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color(0xFFe1e1e1),
                     contentColor = Color(0xFFe1e1e1)
@@ -129,7 +129,7 @@ fun PaymentSuccess(navController: NavHostController, amount: String?="0.00") {
                           }
                 }, modifier = Modifier
                     .weight(0.45f)
-                    .height(40.dp),
+                    .height(IntrinsicSize.Max),
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color(0xFFe1e1e1),
                     contentColor = Color(0xFFe1e1e1)

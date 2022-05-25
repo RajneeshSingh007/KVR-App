@@ -125,7 +125,8 @@ fun MainScreen() {
             Surface(color = Color.White, modifier = Modifier
                 .fillMaxHeight()
                 .fillMaxWidth()
-                .verticalScroll(state = scrollState)) {
+                .verticalScroll(state = scrollState)
+            ) {
                 LanguageScreen(showDialog = languageDialog.value, onDismiss = {
                   hide, lang ->  changeLang(hide, lang)
                 })
